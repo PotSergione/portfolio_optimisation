@@ -152,9 +152,9 @@
   <script>
     async function loadDashboard() {
       try {
-        const summary = await fetch("/outputs/latest/summary.json").then(r => r.json());
-        const weightsCsv = await fetch("/outputs/latest/weights.csv").then(r => r.text());
-        const rewardCsv = await fetch("/outputs/latest/implied_portfolio_return_distribution.csv").then(r => r.text());
+        const summary = await fetch("outputs/latest/summary.json").then(r => r.json());
+        const weightsCsv = await fetch("outputs/latest/weights.csv").then(r => r.text());
+        const rewardCsv = await fetch("outputs/latest/implied_portfolio_return_distribution.csv").then(r => r.text());
 
         /* =======================
            KPI RENDERING
