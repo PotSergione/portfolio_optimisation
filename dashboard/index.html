@@ -236,7 +236,7 @@
             .filter(v => !isNaN(v));
 
           // ---- Load fitted Student-t parameters ----
-          const tFit = await fetch("/outputs/latest/reward_t_fit.json")
+          const tFit = await fetch("outputs/latest/reward_t_fit.json")
             .then(r => r.json())
             .then(d => d[0]);
 
