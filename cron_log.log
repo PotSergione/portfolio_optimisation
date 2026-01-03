@@ -7,3 +7,31 @@ ModuleNotFoundError: No module named 'yfinance'
  1 file changed, 5 insertions(+)
  create mode 100644 cron_log.log
 fatal: could not read Username for 'https://github.com': No such device or address
+outputs/latest
+outputs/history/2026-01-03
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0022105129482345785
+            Iterations: 52
+            Function evaluations: 4734
+            Gradient evaluations: 52
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 41.57%
+LYTR.DE Weight: 24.53%
+LYM9.DE Weight: 33.90%
+
+Expected Daily Return: 0.22%
+Daily Volatility: 0.81%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 74.44%
+Annualized Volatility: 12.93%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.9008590390179009
+Simulated Spearman Correlation:
+0.923880500507412
