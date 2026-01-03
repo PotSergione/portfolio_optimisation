@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <title>AMUNDI CVar-constrained optimal portfolio</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
   <style>
     :root {
       --bg: #0f172a;
@@ -14,7 +17,9 @@
       --accent: #38bdf8;
       --secondary: #a5b4fc;
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       padding: 2rem;
@@ -22,60 +27,112 @@
       background: var(--bg);
       color: var(--text);
     }
+
     .container { max-width: 1200px; margin: auto; }
+
     header { margin-bottom: 2rem; }
+
     h1 { font-size: 2.2rem; font-weight: 700; margin: 0; }
+
     .subtitle { color: var(--muted); margin-top: 0.25rem; font-size: 0.9rem; }
-    .grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 1.5rem; }
-    .grid-full { margin-top: 1.5rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 1.5rem;
+    }
+
+    .grid-full {
+      margin-top: 1.5rem;
+    }
+
     .card {
       background: var(--card);
       border-radius: 14px;
       padding: 1.5rem;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .card:hover { transform: translateY(-4px); }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
     h2 { margin: 0; font-size: 1.15rem; font-weight: 600; }
-    .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
-    .kpi { background: #020617; border-radius: 10px; padding: 1rem; }
-    .kpi span { display: block; font-size: 0.8rem; color: var(--muted); }
-    .kpi strong { font-size: 1.6rem; font-weight: 600; color: var(--accent); }
-    .kpi.secondary strong { font-size: 1.3rem; color: var(--secondary); }
-    footer { margin-top: 2rem; text-align: center; color: var(--muted); font-size: 0.8rem; }
-    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .kpi {
+      background: #020617;
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    .kpi span {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .kpi strong {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .kpi.secondary strong {
+      font-size: 1.3rem;
+      color: var(--secondary);
+    }
+
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 
 <body>
   <div class="container">
+
     <header>
       <h1>AMUNDI CVar-constrained optimal allocation</h1>
-      <p class="subtitle">Copula-based 1.5% CVaR-constrained portfolio optimization.</p>
+      <p class="subtitle">
+        Copula-based 1.5% CVaR-constrained portfolio optimization using Amundi ETFs on the German exchange.
+      </p>
     </header>
 
     <section class="grid">
+
       <div class="card" id="kpis">
         <h2>Key Metrics</h2>
         <p class="subtitle">Loading…</p>
       </div>
+
       <div class="card">
         <div id="weights"></div>
       </div>
-    </section>
 
-    <section class="grid-full">
-      <div class="card">
-        <h2>Benchmark Performance History</h2>
-        <p class="subtitle">Historical returns (Source: /history/2026-01-03/)</p>
-        <div id="historyPlot"></div>
-      </div>
     </section>
 
     <section class="grid-full">
       <div class="card">
         <h2>Return Distribution</h2>
-        <p class="subtitle">Simulated portfolio daily rewards with Student-t fit.</p>
+        <p class="subtitle">
+          Simulated portfolio reward distribution (daily).
+        </p>
         <div id="rewardDist"></div>
       </div>
     </section>
@@ -83,92 +140,160 @@
     <footer>
       Updated automatically · <span id="timestamp">—</span>
     </footer>
+
   </div>
 
   <script>
     async function loadDashboard() {
       try {
-        // NOTE: Added "../" because index.html is in the dashboard/ folder
+        // Paths adjusted with ../ to reach folders outside of the dashboard/ directory
         const summary = await fetch("../outputs/latest/summary.json").then(r => r.json());
         const weightsCsv = await fetch("../outputs/latest/weights.csv").then(r => r.text());
         const rewardCsv = await fetch("../outputs/latest/implied_portfolio_return_distribution.csv").then(r => r.text());
-        const historyCsv = await fetch("../history/2026-01-03/benchmark_return_distribution.csv").then(r => r.text());
         const tFit = await fetch("../outputs/latest/reward_t_fit.json").then(r => r.json()).then(d => d[0]);
 
-        /* KPI RENDERING */
+        /* =======================
+           KPI RENDERING
+        ======================= */
         document.getElementById("kpis").innerHTML = `
           <h2>Annual Metrics</h2>
+          <p class="subtitle">Extrapolated yearly metrics from simulations.</p>
           <div class="kpi-grid">
-            <div class="kpi"><span>Annual Return</span><strong>${(summary.annual_return * 100).toFixed(2)}%</strong></div>
-            <div class="kpi"><span>Annual Volatility</span><strong>${(summary.annual_volatility * 100).toFixed(2)}%</strong></div>
-            <div class="kpi"><span>Annual CVaR</span><strong>${(summary.annual_cvar * 100).toFixed(2)}%</strong></div>
+            <div class="kpi">
+              <span>Annual Return</span>
+              <strong>${(summary.annual_return * 100).toFixed(2)}%</strong>
+            </div>
+            <div class="kpi">
+              <span>Annual Volatility</span>
+              <strong>${(summary.annual_volatility * 100).toFixed(2)}%</strong>
+            </div>
+            <div class="kpi">
+              <span>Annual CVaR</span>
+              <strong>${(summary.annual_cvar * 100).toFixed(2)}%</strong>
+            </div>
           </div>
+
           <h2 style="margin-top:1.6rem;">Daily Analysis</h2>
+          <p class="subtitle">Simulated daily distribution.</p>
           <div class="kpi-grid">
-            <div class="kpi secondary"><span>Expected Return</span><strong>${(summary.expected_daily_return * 100).toFixed(3)}%</strong></div>
-            <div class="kpi secondary"><span>Daily Volatility</span><strong>${(summary.daily_volatility * 100).toFixed(3)}%</strong></div>
-            <div class="kpi secondary"><span>Daily CVaR</span><strong>${(summary.daily_cvar * 100).toFixed(3)}%</strong></div>
+            <div class="kpi secondary">
+              <span>Expected Daily Return</span>
+              <strong>${(summary.expected_daily_return * 100).toFixed(3)}%</strong>
+            </div>
+            <div class="kpi secondary">
+              <span>Daily Volatility</span>
+              <strong>${(summary.daily_volatility * 100).toFixed(3)}%</strong>
+            </div>
+            <div class="kpi secondary">
+              <span>Daily CVaR</span>
+              <strong>${(summary.daily_cvar * 100).toFixed(3)}%</strong>
+            </div>
           </div>
         `;
 
-        /* WEIGHTS DONUT */
+        /* =======================
+           WEIGHTS DONUT
+        ======================= */
         const rows = weightsCsv.trim().split("\n").slice(1).map(r => r.split(","));
+        const tickers = rows.map(r => r[0]);
+        const values = rows.map(r => parseFloat(r[1]));
+
+        const bluePalette = [
+          "#e0f2fe","#bae6fd","#7dd3fc","#38bdf8",
+          "#0ea5e9","#0284c7","#0369a1","#075985","#0c4a6e"
+        ];
+
         Plotly.newPlot("weights", [{
-          type: "pie", labels: rows.map(r => r[0]), values: rows.map(r => parseFloat(r[1])),
-          hole: 0.6, marker: { colors: ["#7dd3fc", "#38bdf8", "#0ea5e9", "#0284c7", "#0369a1"] },
-          textinfo: "label+percent"
-        }], { 
-          paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)", font: { color: "#e5e7eb" },
-          margin: {t:40, b:0, l:0, r:0} 
-        });
-
-        /* BENCHMARK HISTORY */
-        const hRows = historyCsv.trim().split("\n").slice(1).map(r => r.split(","));
-        Plotly.newPlot("historyPlot", [{
-          x: hRows.map(r => r[0]), y: hRows.map(r => parseFloat(r[1])),
-          type: 'scatter', mode: 'lines', line: { color: "#38bdf8", width: 2 },
-          fill: 'tozeroy', fillcolor: 'rgba(56, 189, 248, 0.1)'
+          type: "pie",
+          labels: tickers,
+          values: values,
+          hole: 0.6,
+          marker: {
+            colors: values.map((_, i) => bluePalette[i % bluePalette.length]),
+            line: { color: "#020617", width: 1 }
+          },
+          textinfo: "label+percent",
+          hoverinfo: "label+value+percent"
         }], {
-          height: 300, paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)",
-          font: { color: "#e5e7eb" }, margin: {t:10, r:10, b:40, l:50},
-          xaxis: { gridcolor: "#1e293b" }, yaxis: { gridcolor: "#1e293b", tickformat: ".2%" }
+          title: { text: "Portfolio Allocation", font: { color: "#e5e7eb", size: 18 } },
+          paper_bgcolor: "rgba(0,0,0,0)",
+          plot_bgcolor: "rgba(0,0,0,0)",
+          font: { color: "#e5e7eb" }
         });
 
-        /* REWARD DISTRIBUTION */
+        /* =======================
+          REWARD DISTRIBUTION + STUDENT-T FIT
+        ======================= */
         const rewards = rewardCsv.trim().split("\n").map(v => parseFloat(v)).filter(v => !isNaN(v));
         const { nu, mu, sigma } = tFit;
-        
+
         function gamma(z) {
-            const p = [0.99999999999980993, 676.5203681218851, -1259.1392167224028, 771.32342877765313, -176.61502916214059, 12.507343278686905, -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7];
-            if (z < 0.5) return Math.PI / (Math.sin(Math.PI * z) * gamma(1 - z));
-            z -= 1; let x = p[0];
-            for (let i = 1; i < 9; i++) x += p[i] / (z + i);
-            const t = z + 7.5;
-            return Math.sqrt(2 * Math.PI) * t ** (z + 0.5) * Math.exp(-t) * x;
+          const g = 7;
+          const p = [0.99999999999980993, 676.5203681218851, -1259.1392167224028, 771.32342877765313, -176.61502916214059, 12.507343278686905, -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7];
+          if (z < 0.5) return Math.PI / (Math.sin(Math.PI * z) * gamma(1 - z));
+          z -= 1;
+          let x = p[0];
+          for (let i = 1; i < g + 2; i++) x += p[i] / (z + i);
+          const t = z + g + 0.5;
+          return Math.sqrt(2 * Math.PI) * t ** (z + 0.5) * Math.exp(-t) * x;
         }
 
         const xmin = Math.min(...rewards), xmax = Math.max(...rewards);
-        const xvals = Array.from({ length: 200 }, (_, i) => xmin + (xmax - xmin) * i / 199);
+        const xvals = Array.from({ length: 400 }, (_, i) => xmin + (xmax - xmin) * i / 399);
         const pdf = xvals.map(x => {
-            const z = (x - mu) / sigma;
-            return (gamma((nu + 1) / 2) / (Math.sqrt(nu * Math.PI) * sigma * gamma(nu / 2))) * (1 + (z * z) / nu) ** (-(nu + 1) / 2);
+          const z = (x - mu) / sigma;
+          const coef = gamma((nu + 1) / 2) / (Math.sqrt(nu * Math.PI) * sigma * gamma(nu / 2));
+          return coef * (1 + (z * z) / nu) ** (-(nu + 1) / 2);
         });
+
+        const sorted = [...rewards].sort((a, b) => a - b);
+        const median = sorted.length % 2 !== 0 ? sorted[Math.floor(sorted.length / 2)] : 0.5 * (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]);
 
         Plotly.newPlot("rewardDist", [
-          { type: "histogram", x: rewards, nbinsx: 80, histnorm: "probability density", marker: { color: "#38bdf8" }, name: "Empirical" },
-          { type: "scatter", x: xvals, y: pdf, mode: "lines", line: { color: "#f8fafc" }, name: `Student-t (ν=${nu.toFixed(1)})` }
+          {
+            type: "histogram",
+            x: rewards,
+            nbinsx: 80,
+            histnorm: "probability density",
+            marker: { color: "#38bdf8", line: { color: "#020617", width: 1 } },
+            opacity: 0.85,
+            name: "Empirical Density"
+          },
+          {
+            type: "scatter",
+            x: xvals,
+            y: pdf,
+            mode: "lines",
+            line: { color: "#f8fafc", width: 2 },
+            name: `Student-t PDF (ν = ${nu.toFixed(2)})`
+          }
         ], {
-          paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)", font: { color: "#e5e7eb" },
-          xaxis: { title: "Daily Return", gridcolor: "#1e293b" }, yaxis: { title: "Density", gridcolor: "#1e293b" }
+          title: { text: "Distribution of Simulated Daily Returns", font: { color: "#e5e7eb", size: 16 } },
+          paper_bgcolor: "rgba(0,0,0,0)",
+          plot_bgcolor: "rgba(0,0,0,0)",
+          font: { color: "#e5e7eb" },
+          xaxis: { title: "Daily Return" },
+          yaxis: { title: "Density" },
+          shapes: [
+            { type: "line", x0: mu, x1: mu, y0: 0, y1: 1, yref: "paper", line: { color: "#94a3b8", width: 2, dash: "dash" } },
+            { type: "line", x0: median, x1: median, y0: 0, y1: 1, yref: "paper", line: { color: "#94a3b8", width: 2, dash: "dot" } }
+          ],
+          annotations: [
+            { x: median, y: 1, yref: "paper", text: "Median", showarrow: false, yanchor: "bottom", font: { color: "#94a3b8", size: 12 } }
+          ]
         });
 
+        /* =======================
+           TIMESTAMP
+        ======================= */
         document.getElementById("timestamp").textContent = new Date(summary.run_date).toLocaleString();
 
       } catch (err) {
         console.error(err);
-        document.getElementById("kpis").innerHTML = "<h2>Error</h2><p class='subtitle'>Failed to load data. Ensure paths are correct.</p>";
+        document.getElementById("kpis").innerHTML = "<h2>Error</h2><p class='subtitle'>Failed to load dashboard data.</p>";
       }
     }
+
     loadDashboard();
   </script>
 </body>
