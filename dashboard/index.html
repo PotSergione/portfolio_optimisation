@@ -143,158 +143,176 @@
 
   </div>
 
-  <script>
-    async function loadDashboard() {
-      try {
-        // Paths adjusted with ../ to reach folders outside of the dashboard/ directory
-        const summary = await fetch("../outputs/latest/summary.json").then(r => r.json());
-        const weightsCsv = await fetch("../outputs/latest/weights.csv").then(r => r.text());
-        const rewardCsv = await fetch("../outputs/latest/implied_portfolio_return_distribution.csv").then(r => r.text());
-        const tFit = await fetch("../outputs/latest/reward_t_fit.json").then(r => r.json()).then(d => d[0]);
+<script>
+async function loadDashboard() {
+  try {
+    // 1️⃣ Fetch all main data files
+    const summary = await fetch("../outputs/latest/summary.json").then(r => r.json());
+    const weightsCsv = await fetch("../outputs/latest/weights.csv").then(r => r.text());
+    const rewardCsv = await fetch("../outputs/latest/implied_portfolio_return_distribution.csv").then(r => r.text());
+    const tFit = await fetch("../outputs/latest/reward_t_fit.json").then(r => r.json()).then(d => d[0]);
 
-        /* =======================
-           KPI RENDERING
-        ======================= */
-        document.getElementById("kpis").innerHTML = `
-          <h2>Annual Metrics</h2>
-          <p class="subtitle">Extrapolated yearly metrics from simulations.</p>
-          <div class="kpi-grid">
-            <div class="kpi">
-              <span>Annual Return</span>
-              <strong>${(summary.annual_return * 100).toFixed(2)}%</strong>
-            </div>
-            <div class="kpi">
-              <span>Annual Volatility</span>
-              <strong>${(summary.annual_volatility * 100).toFixed(2)}%</strong>
-            </div>
-            <div class="kpi">
-              <span>Annual CVaR</span>
-              <strong>${(summary.annual_cvar * 100).toFixed(2)}%</strong>
-            </div>
-          </div>
-
-          <h2 style="margin-top:1.6rem;">Daily Analysis</h2>
-          <p class="subtitle">Simulated daily distribution.</p>
-          <div class="kpi-grid">
-            <div class="kpi secondary">
-              <span>Expected Daily Return</span>
-              <strong>${(summary.expected_daily_return * 100).toFixed(3)}%</strong>
-            </div>
-            <div class="kpi secondary">
-              <span>Daily Volatility</span>
-              <strong>${(summary.daily_volatility * 100).toFixed(3)}%</strong>
-            </div>
-            <div class="kpi secondary">
-              <span>Daily CVaR</span>
-              <strong>${(summary.daily_cvar * 100).toFixed(3)}%</strong>
-            </div>
-          </div>
-        `;
-
-        /* =======================
-           WEIGHTS DONUT
-        ======================= */
-        const rows = weightsCsv.trim().split("\n").slice(1).map(r => r.split(","));
-        const tickers = rows.map(r => r[0]);
-        const values = rows.map(r => parseFloat(r[1]));
-
-        const bluePalette = [
-          "#e0f2fe","#bae6fd","#7dd3fc","#38bdf8",
-          "#0ea5e9","#0284c7","#0369a1","#075985","#0c4a6e"
-        ];
-
-        Plotly.newPlot("weights", [{
-          type: "pie",
-          labels: tickers,
-          values: values,
-          hole: 0.6,
-          marker: {
-            colors: values.map((_, i) => bluePalette[i % bluePalette.length]),
-            line: { color: "#020617", width: 1 }
-          },
-          textinfo: "label+percent",
-          hoverinfo: "label+value+percent"
-        }], {
-          title: { text: "Portfolio Allocation", font: { color: "#e5e7eb", size: 18 } },
-          paper_bgcolor: "rgba(0,0,0,0)",
-          plot_bgcolor: "rgba(0,0,0,0)",
-          font: { color: "#e5e7eb" }
-        });
-
-        /* =======================
-          REWARD DISTRIBUTION + STUDENT-T FIT
-        ======================= */
-        const rewards = rewardCsv.trim().split("\n").map(v => parseFloat(v)).filter(v => !isNaN(v));
-        const { nu, mu, sigma } = tFit;
-
-        function gamma(z) {
-          const g = 7;
-          const p = [0.99999999999980993, 676.5203681218851, -1259.1392167224028, 771.32342877765313, -176.61502916214059, 12.507343278686905, -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7];
-          if (z < 0.5) return Math.PI / (Math.sin(Math.PI * z) * gamma(1 - z));
-          z -= 1;
-          let x = p[0];
-          for (let i = 1; i < g + 2; i++) x += p[i] / (z + i);
-          const t = z + g + 0.5;
-          return Math.sqrt(2 * Math.PI) * t ** (z + 0.5) * Math.exp(-t) * x;
-        }
-
-        const xmin = Math.min(...rewards), xmax = Math.max(...rewards);
-        const xvals = Array.from({ length: 400 }, (_, i) => xmin + (xmax - xmin) * i / 399);
-        const pdf = xvals.map(x => {
-          const z = (x - mu) / sigma;
-          const coef = gamma((nu + 1) / 2) / (Math.sqrt(nu * Math.PI) * sigma * gamma(nu / 2));
-          return coef * (1 + (z * z) / nu) ** (-(nu + 1) / 2);
-        });
-
-        const sorted = [...rewards].sort((a, b) => a - b);
-        const median = sorted.length % 2 !== 0 ? sorted[Math.floor(sorted.length / 2)] : 0.5 * (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]);
-
-        Plotly.newPlot("rewardDist", [
-          {
-            type: "histogram",
-            x: rewards,
-            nbinsx: 80,
-            histnorm: "probability density",
-            marker: { color: "#38bdf8", line: { color: "#020617", width: 1 } },
-            opacity: 0.85,
-            name: "Empirical Density"
-          },
-          {
-            type: "scatter",
-            x: xvals,
-            y: pdf,
-            mode: "lines",
-            line: { color: "#f8fafc", width: 2 },
-            name: `Student-t PDF (ν = ${nu.toFixed(2)})`
-          }
-        ], {
-          title: { text: "Distribution of Simulated Daily Returns", font: { color: "#e5e7eb", size: 16 } },
-          paper_bgcolor: "rgba(0,0,0,0)",
-          plot_bgcolor: "rgba(0,0,0,0)",
-          font: { color: "#e5e7eb" },
-          xaxis: { title: "Daily Return" },
-          yaxis: { title: "Density" },
-          shapes: [
-            { type: "line", x0: mu, x1: mu, y0: 0, y1: 1, yref: "paper", line: { color: "#94a3b8", width: 2, dash: "dash" } },
-            { type: "line", x0: median, x1: median, y0: 0, y1: 1, yref: "paper", line: { color: "#94a3b8", width: 2, dash: "dot" } }
-          ],
-          annotations: [
-            { x: median, y: 1, yref: "paper", text: "Median", showarrow: false, yanchor: "bottom", font: { color: "#94a3b8", size: 12 } }
-          ]
-        });
-
-        /* =======================
-           TIMESTAMP
-        ======================= */
-        document.getElementById("timestamp").textContent = new Date(summary.run_date).toLocaleString();
-
-      } catch (err) {
-        console.error(err);
-        document.getElementById("kpis").innerHTML = "<h2>Error</h2><p class='subtitle'>Failed to load dashboard data.</p>";
+    // 2️⃣ Fetch correlations safely
+    let corr = { original_spearman: 0, simulated_spearman: 0 }; // defaults
+    try {
+      const corrCsv = await fetch("../outputs/latest/correlation.csv").then(r => {
+        if (!r.ok) throw new Error("Failed to fetch correlation.csv");
+        return r.text();
+      });
+      const corrLines = corrCsv.trim().split("\n").filter(l => l);
+      if (corrLines.length >= 2) {
+        const headers = corrLines[0].split(",");
+        const values = corrLines[1].split(",");
+        headers.forEach((h, i) => { corr[h.trim()] = parseFloat(values[i]); });
       }
+    } catch(err) {
+      console.warn("Could not load correlation.csv, using 0 for correlations", err);
+    }
+    console.log("Parsed correlations:", corr);
+
+    // 3️⃣ Render KPI widget
+    // 3️⃣ Render KPI widget with two rows
+document.getElementById("kpis").innerHTML = `
+  <h2>Annual Metrics</h2>
+  <p class="subtitle">Extrapolated yearly metrics from simulations.</p>
+
+  <!-- First row: Annual metrics -->
+  <div class="kpi-grid" style="grid-template-columns: repeat(3, 1fr);">
+    <div class="kpi">
+      <span>Annual Return</span>
+      <strong>${(summary.annual_return * 100).toFixed(2)}%</strong>
+    </div>
+    <div class="kpi">
+      <span>Annual Volatility</span>
+      <strong>${(summary.annual_volatility * 100).toFixed(2)}%</strong>
+    </div>
+    <div class="kpi">
+      <span>Annual CVaR</span>
+      <strong>${(summary.annual_cvar * 100).toFixed(2)}%</strong>
+    </div>
+  </div>
+
+  <!-- Second row: Spearman correlations -->
+  <h2 style="margin-top:1.6rem;">Correlations</h2>
+  <p class="subtitle">Spearman correlations for original vs simulated data.</p>
+  <div class="kpi-grid" style="grid-template-columns: repeat(2, 1fr);">
+    <div class="kpi secondary">
+      <span>Original Spearman</span>
+      <strong style="color:#0284c7">${corr.original_spearman.toFixed(3)}</strong>
+    </div>
+    <div class="kpi secondary">
+      <span>Simulated Spearman</span>
+      <strong style="color:#0284c7">${corr.simulated_spearman.toFixed(3)}</strong>
+    </div>
+  </div>
+
+  <!-- Third row: Daily analysis -->
+  <h2 style="margin-top:1.6rem;">Daily Analysis</h2>
+  <p class="subtitle">Simulated daily distribution.</p>
+  <div class="kpi-grid">
+    <div class="kpi secondary">
+      <span>Expected Daily Return</span>
+      <strong>${(summary.expected_daily_return * 100).toFixed(3)}%</strong>
+    </div>
+    <div class="kpi secondary">
+      <span>Daily Volatility</span>
+      <strong>${(summary.daily_volatility * 100).toFixed(3)}%</strong>
+    </div>
+    <div class="kpi secondary">
+      <span>Daily CVaR</span>
+      <strong>${(summary.daily_cvar * 100).toFixed(3)}%</strong>
+    </div>
+  </div>
+`;
+
+    // 4️⃣ WEIGHTS DONUT
+    const rows = weightsCsv.trim().split("\n").slice(1).map(r => r.split(","));
+    const tickers = rows.map(r => r[0]);
+    const values = rows.map(r => parseFloat(r[1]));
+
+    const bluePalette = [
+      "#e0f2fe","#bae6fd","#7dd3fc","#38bdf8",
+      "#0ea5e9","#0284c7","#0369a1","#075985","#0c4a6e"
+    ];
+
+    Plotly.newPlot("weights", [{
+      type: "pie",
+      labels: tickers,
+      values: values,
+      hole: 0.6,
+      marker: {
+        colors: values.map((_, i) => bluePalette[i % bluePalette.length]),
+        line: { color: "#020617", width: 1 }
+      },
+      textinfo: "label+percent",
+      hoverinfo: "label+value+percent"
+    }], {
+      title: { text: "Portfolio Allocation", font: { color: "#e5e7eb", size: 18 } },
+      paper_bgcolor: "rgba(0,0,0,0)",
+      plot_bgcolor: "rgba(0,0,0,0)",
+      font: { color: "#e5e7eb" }
+    });
+
+    // 5️⃣ REWARD DISTRIBUTION
+    const rewards = rewardCsv.trim().split("\n").map(v => parseFloat(v)).filter(v => !isNaN(v));
+    const { nu, mu, sigma } = tFit;
+
+    function gamma(z) {
+      const g = 7;
+      const p = [0.99999999999980993, 676.5203681218851, -1259.1392167224028,
+                 771.32342877765313, -176.61502916214059, 12.507343278686905,
+                 -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7];
+      if (z < 0.5) return Math.PI / (Math.sin(Math.PI * z) * gamma(1 - z));
+      z -= 1; let x = p[0];
+      for (let i = 1; i < g + 2; i++) x += p[i] / (z + i);
+      const t = z + g + 0.5;
+      return Math.sqrt(2 * Math.PI) * t ** (z + 0.5) * Math.exp(-t) * x;
     }
 
-    loadDashboard();
-  </script>
+    const xmin = Math.min(...rewards), xmax = Math.max(...rewards);
+    const xvals = Array.from({ length: 400 }, (_, i) => xmin + (xmax - xmin) * i / 399);
+    const pdf = xvals.map(x => {
+      const z = (x - mu) / sigma;
+      const coef = gamma((nu + 1) / 2) / (Math.sqrt(nu * Math.PI) * sigma * gamma(nu / 2));
+      return coef * (1 + (z * z) / nu) ** (-(nu + 1) / 2);
+    });
+
+    const sorted = [...rewards].sort((a, b) => a - b);
+    const median = sorted.length % 2 !== 0 ? sorted[Math.floor(sorted.length / 2)] :
+                   0.5 * (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]);
+
+    Plotly.newPlot("rewardDist", [
+      { type: "histogram", x: rewards, nbinsx: 80, histnorm: "probability density",
+        marker: { color: "#38bdf8", line: { color: "#020617", width: 1 } }, opacity: 0.85,
+        name: "Empirical Density" },
+      { type: "scatter", x: xvals, y: pdf, mode: "lines",
+        line: { color: "#f8fafc", width: 2 },
+        name: `Student-t PDF (ν = ${nu.toFixed(2)})` }
+    ], {
+      title: { text: "Distribution of Simulated Daily Returns", font: { color: "#e5e7eb", size: 16 } },
+      paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)",
+      font: { color: "#e5e7eb" },
+      xaxis: { title: "Daily Return" }, yaxis: { title: "Density" },
+      shapes: [
+        { type: "line", x0: mu, x1: mu, y0: 0, y1: 1, yref: "paper", line: { color: "#94a3b8", width: 2, dash: "dash" } },
+        { type: "line", x0: median, x1: median, y0: 0, y1: 1, yref: "paper", line: { color: "#94a3b8", width: 2, dash: "dot" } }
+      ],
+      annotations: [
+        { x: median, y: 1, yref: "paper", text: "Median", showarrow: false, yanchor: "bottom", font: { color: "#94a3b8", size: 12 } }
+      ]
+    });
+
+    // 6️⃣ Update timestamp
+    document.getElementById("timestamp").textContent = new Date(summary.run_date).toLocaleString();
+
+  } catch (err) {
+    console.error(err);
+    document.getElementById("kpis").innerHTML = "<h2>Error</h2><p class='subtitle'>Failed to load dashboard data.</p>";
+  }
+}
+
+loadDashboard();
+</script>
+
 </body>
 </html>

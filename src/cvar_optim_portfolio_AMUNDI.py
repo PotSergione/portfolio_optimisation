@@ -363,6 +363,8 @@ if __name__ == "__main__":
     df_return_distribution.to_csv(LATEST_DIR / "implied_portfolio_return_distribution.csv", index=False)
 
 
+
+    # BUILDING EMAIL MESSAGE TO STREAM RESULTS
     MSG = f"{datetime.datetime.now()}\n" +\
     '\n--- Optimal Hybrid Portfolio Found --- \n' +\
     f"\nExpected Daily Return: {expected_return:.2%}\n" +\
