@@ -89,7 +89,7 @@ def plot_return_distributions(simulated_returns, nonzero_weights):
     return simulated_returns
     
 
-def solve_optimisation(confidence_level=0.95, max_weight=1.0, min_weight=0.0, max_daily_cvar=0.01):
+def solve_optimisation(confidence_level=0.95, max_weight=1.0, min_weight=0.0, max_daily_cvar=0.01, sim_final=None):
 
   # --- Constraints --- #
   constraints = [
@@ -250,7 +250,8 @@ if __name__ == "__main__":
     res = solve_optimisation(confidence_level,
                             max_weight,
                             min_weight,
-                            max_daily_cvar)
+                            max_daily_cvar, 
+                            sim_final)
 
     # --- Extract Results --- #
     if res.success:

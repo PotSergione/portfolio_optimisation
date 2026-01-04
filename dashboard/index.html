@@ -145,16 +145,61 @@ function randn_bm() {
     return Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
 }
 
+// CORRECTED Student-t distribution generator
 function rand_student_t(nu, mu, sigma) {
     const Z = randn_bm();
-    let V = 0;
-    const k = Math.round(nu); 
-    for(let i=0; i<k; i++){
-        let n = randn_bm();
-        V += n*n;
+    
+    // For integer nu (common case for fitted Student-t)
+    if (Math.abs(Math.round(nu) - nu) < 1e-10) {
+        // nu is essentially an integer - use sum of squared normals
+        let V = 0;
+        for(let i = 0; i < nu; i++) {
+            V += randn_bm() ** 2;
+        }
+        const t_val = Z / Math.sqrt(V / nu);
+        return mu + sigma * t_val;
+    } 
+    // For non-integer nu (less common)
+    else {
+        // Generate Gamma(nu/2, 2) = Chi-squared(nu)
+        // Using Marsaglia's method for Gamma distribution
+        const shape = nu / 2;
+        const scale = 2;
+        
+        // Gamma distribution generator
+        function gamma(shape, scale) {
+            if (shape < 1) {
+                // Johnk's algorithm for shape < 1
+                let u, v, x, y;
+                do {
+                    u = Math.random();
+                    v = Math.random();
+                    x = Math.pow(u, 1/shape);
+                    y = Math.pow(v, 1/(1-shape));
+                } while (x + y > 1);
+                return scale * x / (x + y);
+            } else {
+                // Marsaglia's method for shape >= 1
+                const d = shape - 1/3;
+                const c = 1/Math.sqrt(9*d);
+                let u, v, x;
+                do {
+                    do {
+                        v = randn_bm();
+                        x = 1 + c * v;
+                    } while (x <= 0);
+                    x = x * x * x;
+                    u = Math.random();
+                } while (u > 1 - 0.331 * Math.pow(v, 4) && 
+                        Math.log(u) > 0.5 * v * v + d * (1 - x + Math.log(x)));
+                return scale * d * x;
+            }
+        }
+        
+        const chi2 = gamma(shape, scale);
+        const t_val = Z / Math.sqrt(chi2 / nu);
+        return mu + sigma * t_val;
     }
-    const t_val = Z / Math.sqrt(V/k);
-    return mu + sigma * t_val;
 }
 
 async function loadDashboard() {
@@ -206,10 +251,19 @@ async function loadDashboard() {
       hole: 0.6, marker: { colors: ["#e0f2fe","#bae6fd","#7dd3fc","#38bdf8","#0ea5e9","#0284c7","#0369a1"] },
       textinfo: "label+percent"
     }], {
-      title: { text: "Portfolio Allocation", font: { color: "#e5e7eb", size: 18 } },
-      paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)", font: { color: "#e5e7eb" },
-      margin: { t: 25, b: 0, l: 0, r: 0 }
-    });
+    // Use annotations for the center text
+    annotations: [{
+      font: { color: "#e5e7eb", size: 16, family: "Arial, sans-serif" },
+      showarrow: false,
+      text: "Portfolio<br>Allocation", // <br> helps stack the text
+      x: 0.5,
+      y: 0.5
+    }],
+    paper_bgcolor: "rgba(0,0,0,0)", 
+    plot_bgcolor: "rgba(0,0,0,0)", 
+    showlegend: false, // Optional: hides legend to maximize donut size
+    margin: { t: 20, b: 0, l: 10, r: 10 } // Tight margins for a "widget" feel
+  });
 
     // 5️⃣ CORRELATION HEATMAP - FIXED VERSION
     const corrLines = corrMatrixCsv.trim().split("\n").filter(l => l.trim() !== "");
@@ -299,36 +353,99 @@ async function loadDashboard() {
       legend: { orientation: "h", y: -0.2 }
     });
 
-    // 7️⃣ DYNAMICS WIDGET
+    // 7️⃣ DYNAMICS WIDGET with CORRECTED Student-t sampling
     const numPaths = 100;
     const horizon = 100;
     const dynamicsTraces = [];
 
+    // Log fitted parameters for debugging
+    console.log("Fitted Student-t parameters:", {
+        nu: nu,
+        mu: mu,
+        sigma: sigma,
+        mu_percent: (mu * 100).toFixed(3) + "%",
+        sigma_percent: (sigma * 100).toFixed(3) + "%"
+    });
+
+    // Generate paths using corrected Student-t distribution
     for (let i = 0; i < numPaths; i++) {
         let values = [1];
         let currentWealth = 1;
         for (let t = 0; t < horizon; t++) {
+            // Use corrected Student-t generator
             let r = rand_student_t(nu, mu, sigma);
+            
+            // Ensure return is not too extreme (cap at ±50% daily for stability)
+            // This is a practical safeguard for Monte Carlo simulation
+            if (r < -0.5) r = -0.5;
+            if (r > 0.5) r = 0.5;
+            
             currentWealth = currentWealth * (1 + r);
             values.push(currentWealth);
         }
         dynamicsTraces.push({
-            y: values, type: 'scatter', mode: 'lines',
+            y: values, 
+            type: 'scatter', 
+            mode: 'lines',
             line: { color: '#38bdf8', width: 1, opacity: 0.15 }, 
-            showlegend: false, hoverinfo: 'y'
+            showlegend: false, 
+            hoverinfo: 'y'
         });
     }
-    // Highlight first trace
-    // dynamicsTraces[0].line.opacity = 0.9; 
-    // dynamicsTraces[0].line.color = '#e5e7eb';
-    // dynamicsTraces[0].line.width = 2;
+
+    // Calculate and display statistics
+    const finalWealths = dynamicsTraces.map(trace => trace.y[trace.y.length - 1]);
+    const avgFinalWealth = finalWealths.reduce((a, b) => a + b, 0) / numPaths;
+    const medianFinalWealth = [...finalWealths].sort((a, b) => a - b)[Math.floor(numPaths/2)];
+    
+    // Add a line showing the expected path based on mean return
+    const expectedPath = {
+        y: [1],
+        type: 'scatter',
+        mode: 'lines',
+        line: { color: '#f8fafc', width: 3, dash: 'dash' },
+        name: 'Expected Path',
+        showlegend: true
+    };
+    
+    let expectedWealth = 1;
+    for (let t = 0; t < horizon; t++) {
+        expectedWealth = expectedWealth * (1 + mu);
+        expectedPath.y.push(expectedWealth);
+    }
+    
+    dynamicsTraces.push(expectedPath);
 
     Plotly.newPlot("dynamicsPlot", dynamicsTraces, {
-        paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)",
+        paper_bgcolor: "rgba(0,0,0,0)", 
+        plot_bgcolor: "rgba(0,0,0,0)",
         font: { color: "#e5e7eb" },
-        margin: { t: 10, b: 30, l: 40, r: 10 },
-        xaxis: { title: 'Days' }, yaxis: { title: 'Wealth Index' },
-        showlegend: false
+        margin: { t: 30, b: 40, l: 50, r: 20 },
+        xaxis: { 
+            title: 'Days',
+            gridcolor: 'rgba(255,255,255,0.1)'
+        }, 
+        yaxis: { 
+            title: 'Wealth Index',
+            gridcolor: 'rgba(255,255,255,0.1)'
+        },
+        legend: {
+            orientation: 'h',
+            y: -0.2,
+            font: { color: '#e5e7eb' }
+        },
+        hovermode: 'x unified'
+    });
+
+    // Add simulation statistics to the plot title
+    const dynamicsDiv = document.querySelector('#dynamicsPlot');
+    Plotly.relayout(dynamicsDiv, {
+        title: {
+            text: ` Dynamics <br><span style="font-size: 12px; color: #94a3b8">Avg Final Wealth: ${avgFinalWealth.toFixed(2)}x | Median: ${medianFinalWealth.toFixed(2)}x</span>`,
+            font: { color: '#e5e7eb', size: 14 },
+            x: 0.05,
+            y: 0.95
+        }
     });
 
     document.getElementById("timestamp").textContent = new Date(summary.run_date).toLocaleString();
