@@ -9,6 +9,7 @@ import datetime
 import os
 from pathlib import Path
 import json
+from send_email import send_email
 
 
 RUN_DATE = datetime.date.today().isoformat()
@@ -360,3 +361,29 @@ if __name__ == "__main__":
 
     df_return_distribution = pd.DataFrame({'realised_returns': simulated_returns})
     df_return_distribution.to_csv(LATEST_DIR / "implied_portfolio_return_distribution.csv", index=False)
+
+
+    MSG = f"{datetime.datetime.now()}\n" +\
+    '\n--- Optimal Hybrid Portfolio Found --- \n' +\
+    f"\nExpected Daily Return: {expected_return:.2%}\n" +\
+    f"Daily Volatility: {daily_vol:.2%}\n"+\
+    f"Daily CVaR ({int(confidence_level*100)}%): {cvar_alpha:.2%}\n"+\
+    f"\nAnnualized Return: {annual_return:.2%}\n"+\
+    f"Annualized Volatility: {annual_vol:.2%}\n"+\
+    f"Annualized CVaR ({int(confidence_level*100)}%): {annual_cvar:.2%}\n" +\
+    '\n---  Copula model fit of the data ---\n' +\
+    "\nOriginal Spearman Correlation:\n" +\
+    f"{df_daily.corr(method='spearman').iloc[0,1]}\n"+\
+    "Simulated Spearman Correlation:\n"+\
+    f"{df_sim.corr(method='spearman').iloc[0,1]}\n"+\
+    "\n--- Optimal picks ---\n\n"
+
+    for i, w in enumerate(opt_weights):
+        if np.round(w, 2) > 0.00:
+            MSG += f"{tickers[i]} Weight: {w:.2%}\n"
+
+    print(df_simulated[weights_df['ticker']].corr())
+
+    MSG += f"\n---Correlation matrix of selected assets ---\n\n {df_simulated[weights_df['ticker']].corr()}\n"
+
+    send_email(MSG)

@@ -1,10 +1,10 @@
 {
   "run_date": "2026-01-04",
-  "expected_daily_return": 0.002201785742651438,
-  "daily_volatility": 0.00815504265601091,
-  "daily_cvar": -0.014999999999995529,
-  "annual_return": 0.7406177376593168,
-  "annual_volatility": 0.12945728879357116,
-  "annual_cvar": -0.2381176179957422,
+  "expected_daily_return": 0.002172787657160217,
+  "daily_volatility": 0.008126410137874946,
+  "daily_cvar": -0.014999999999995227,
+  "annual_return": 0.7279720631136626,
+  "annual_volatility": 0.12900276165918734,
+  "annual_cvar": -0.23811761799573739,
   "num_assets": 3
 }

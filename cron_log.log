@@ -130,3 +130,13 @@ Original Spearman Correlation:
 0.9008590390179009
 Simulated Spearman Correlation:
 0.9234058379145366
+[main 8bf9824] Auto-update: 2026-01-04 06:00
+ 13 files changed, 100059 insertions(+), 100013 deletions(-)
+ create mode 100644 outputs/history/2026-01-04/correlation.csv
+ create mode 100644 outputs/history/2026-01-04/metrics.csv
+ create mode 100644 outputs/history/2026-01-04/summary.json
+ create mode 100644 outputs/history/2026-01-04/weights.csv
+ rewrite outputs/latest/forecasted_returns.png (93%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   360dba8..8bf9824  main -> main
