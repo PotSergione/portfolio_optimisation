@@ -3,11 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>AMUNDI CVar-constrained optimal portfolio</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
   <style>
     :root {
       --bg: #0f172a;
@@ -17,9 +14,7 @@
       --accent: #38bdf8;
       --secondary: #a5b4fc;
     }
-
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       padding: 2rem;
@@ -27,25 +22,27 @@
       background: var(--bg);
       color: var(--text);
     }
-
     .container { max-width: 1200px; margin: auto; }
-
     header { margin-bottom: 2rem; }
-
     h1 { font-size: 2.2rem; font-weight: 700; margin: 0; }
-
     .subtitle { color: var(--muted); margin-top: 0.25rem; font-size: 0.9rem; }
-
     .grid {
       display: grid;
       grid-template-columns: 1fr 1.6fr;
       gap: 1.5rem;
     }
-
     .grid-full {
       margin-top: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
     }
-
+    .grid-wide {
+        margin-top: 1.5rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
     .card {
       background: var(--card);
       border-radius: 14px;
@@ -53,60 +50,49 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-
     .card:hover {
       transform: translateY(-4px);
       box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     }
-
     h2 { margin: 0; font-size: 1.15rem; font-weight: 600; }
-
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
       margin-top: 1rem;
     }
-
     .kpi {
       background: #020617;
       border-radius: 10px;
       padding: 1rem;
     }
-
     .kpi span {
       display: block;
       font-size: 0.8rem;
       color: var(--muted);
     }
-
     .kpi strong {
       font-size: 1.6rem;
       font-weight: 600;
       color: var(--accent);
     }
-
     .kpi.secondary strong {
       font-size: 1.3rem;
       color: var(--secondary);
     }
-
     footer {
       margin-top: 2rem;
       text-align: center;
       color: var(--muted);
       font-size: 0.8rem;
     }
-
-    @media (max-width: 900px) {
-      .grid { grid-template-columns: 1fr; }
+    @media (max-width: 1100px) {
+      .grid, .grid-full { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-
 <body>
   <div class="container">
-
     <header>
       <h1>AMUNDI CVar-constrained optimal allocation</h1>
       <p class="subtitle">
@@ -115,204 +101,243 @@
     </header>
 
     <section class="grid">
-
       <div class="card" id="kpis">
         <h2>Key Metrics</h2>
         <p class="subtitle">Loading…</p>
       </div>
-
       <div class="card">
         <div id="weights"></div>
       </div>
-
     </section>
 
     <section class="grid-full">
       <div class="card">
         <h2>Return Distribution</h2>
-        <p class="subtitle">
-          Simulated portfolio reward distribution (daily).
-        </p>
+        <p class="subtitle">Simulated portfolio reward distribution (daily).</p>
         <div id="rewardDist"></div>
       </div>
+      <div class="card">
+        <h2>Asset Correlations</h2>
+        <p class="subtitle">Heatmap of selected asset returns correlation.</p>
+        <div id="corrHeatmap"></div>
+      </div>
+    </section>
+
+    <section class="grid-wide">
+        <div class="card">
+            <h2>Portfolio Dynamics Simulation</h2>
+            <p class="subtitle">Monte Carlo simulation of 100 wealth trajectories over 100 days (Student-t distributed).</p>
+            <div id="dynamicsPlot"></div>
+        </div>
     </section>
 
     <footer>
       Updated automatically · <span id="timestamp">—</span>
     </footer>
-
   </div>
 
 <script>
+// --- Random Number Generators ---
+function randn_bm() {
+    let u = 0, v = 0;
+    while(u === 0) u = Math.random(); 
+    while(v === 0) v = Math.random();
+    return Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
+}
+
+function rand_student_t(nu, mu, sigma) {
+    const Z = randn_bm();
+    let V = 0;
+    const k = Math.round(nu); 
+    for(let i=0; i<k; i++){
+        let n = randn_bm();
+        V += n*n;
+    }
+    const t_val = Z / Math.sqrt(V/k);
+    return mu + sigma * t_val;
+}
+
 async function loadDashboard() {
   try {
-    // 1️⃣ Fetch all main data files
+    // 1️⃣ Fetch data files
     const summary = await fetch("../outputs/latest/summary.json").then(r => r.json());
     const weightsCsv = await fetch("../outputs/latest/weights.csv").then(r => r.text());
     const rewardCsv = await fetch("../outputs/latest/implied_portfolio_return_distribution.csv").then(r => r.text());
     const tFit = await fetch("../outputs/latest/reward_t_fit.json").then(r => r.json()).then(d => d[0]);
+    const corrMatrixCsv = await fetch("../outputs/latest/correlation_selected_assets.csv").then(r => r.text());
 
-    // 2️⃣ Fetch correlations safely
-    let corr = { original_spearman: 0, simulated_spearman: 0 }; // defaults
+    // 2️⃣ Fetch basic correlations (for KPI)
+    let corr = { original_spearman: 0, simulated_spearman: 0 }; 
     try {
-      const corrCsv = await fetch("../outputs/latest/correlation.csv").then(r => {
-        if (!r.ok) throw new Error("Failed to fetch correlation.csv");
-        return r.text();
-      });
+      const corrCsv = await fetch("../outputs/latest/correlation.csv").then(r => r.text());
       const corrLines = corrCsv.trim().split("\n").filter(l => l);
       if (corrLines.length >= 2) {
         const headers = corrLines[0].split(",");
         const values = corrLines[1].split(",");
         headers.forEach((h, i) => { corr[h.trim()] = parseFloat(values[i]); });
       }
-    } catch(err) {
-      console.warn("Could not load correlation.csv, using 0 for correlations", err);
-    }
-    console.log("Parsed correlations:", corr);
+    } catch(err) { console.warn("Summary correlations unavailable", err); }
 
     // 3️⃣ Render KPI widget
-    // 3️⃣ Render KPI widget with two rows
-document.getElementById("kpis").innerHTML = `
-  <h2>Annual Metrics</h2>
-  <p class="subtitle">Extrapolated yearly metrics from simulations.</p>
-
-  <!-- First row: Annual metrics -->
-  <div class="kpi-grid" style="grid-template-columns: repeat(3, 1fr);">
-    <div class="kpi">
-      <span>Annual Return</span>
-      <strong>${(summary.annual_return * 100).toFixed(2)}%</strong>
-    </div>
-    <div class="kpi">
-      <span>Annual Volatility</span>
-      <strong>${(summary.annual_volatility * 100).toFixed(2)}%</strong>
-    </div>
-    <div class="kpi">
-      <span>Annual CVaR</span>
-      <strong>${(summary.annual_cvar * 100).toFixed(2)}%</strong>
-    </div>
-  </div>
-
-  <!-- Second row: Spearman correlations -->
-  <h2 style="margin-top:1.6rem;">Correlations</h2>
-  <p class="subtitle">Spearman correlations for original vs simulated data.</p>
-  <div class="kpi-grid" style="grid-template-columns: repeat(2, 1fr);">
-    <div class="kpi secondary">
-      <span>Original Spearman</span>
-      <strong style="color:#0284c7">${corr.original_spearman.toFixed(3)}</strong>
-    </div>
-    <div class="kpi secondary">
-      <span>Simulated Spearman</span>
-      <strong style="color:#0284c7">${corr.simulated_spearman.toFixed(3)}</strong>
-    </div>
-  </div>
-
-  <!-- Third row: Daily analysis -->
-  <h2 style="margin-top:1.6rem;">Daily Analysis</h2>
-  <p class="subtitle">Simulated daily distribution.</p>
-  <div class="kpi-grid">
-    <div class="kpi secondary">
-      <span>Expected Daily Return</span>
-      <strong>${(summary.expected_daily_return * 100).toFixed(3)}%</strong>
-    </div>
-    <div class="kpi secondary">
-      <span>Daily Volatility</span>
-      <strong>${(summary.daily_volatility * 100).toFixed(3)}%</strong>
-    </div>
-    <div class="kpi secondary">
-      <span>Daily CVaR</span>
-      <strong>${(summary.daily_cvar * 100).toFixed(3)}%</strong>
-    </div>
-  </div>
-`;
+    document.getElementById("kpis").innerHTML = `
+      <h2>Annual Metrics</h2>
+      <div class="kpi-grid">
+        <div class="kpi"><span>Annual Return</span><strong>${(summary.annual_return * 100).toFixed(2)}%</strong></div>
+        <div class="kpi"><span>Annual Vol</span><strong>${(summary.annual_volatility * 100).toFixed(2)}%</strong></div>
+        <div class="kpi"><span>Annual CVaR</span><strong>${(summary.annual_cvar * 100).toFixed(2)}%</strong></div>
+      </div>
+      <h2 style="margin-top:1.6rem;">Model Fit</h2>
+      <div class="kpi-grid" style="grid-template-columns: repeat(2, 1fr);">
+        <div class="kpi secondary"><span>Original Spearman</span><strong style="color:#0284c7">${corr.original_spearman.toFixed(3)}</strong></div>
+        <div class="kpi secondary"><span>Simulated Spearman</span><strong style="color:#0284c7">${corr.simulated_spearman.toFixed(3)}</strong></div>
+      </div>
+      <h2 style="margin-top:1.6rem;">Daily Stats</h2>
+      <div class="kpi-grid">
+        <div class="kpi secondary"><span>Exp. Return</span><strong>${(summary.expected_daily_return * 100).toFixed(3)}%</strong></div>
+        <div class="kpi secondary"><span>Volatility</span><strong>${(summary.daily_volatility * 100).toFixed(3)}%</strong></div>
+        <div class="kpi secondary"><span>CVaR</span><strong>${(summary.daily_cvar * 100).toFixed(3)}%</strong></div>
+      </div>
+    `;
 
     // 4️⃣ WEIGHTS DONUT
-    const rows = weightsCsv.trim().split("\n").slice(1).map(r => r.split(","));
-    const tickers = rows.map(r => r[0]);
-    const values = rows.map(r => parseFloat(r[1]));
-
-    const bluePalette = [
-      "#e0f2fe","#bae6fd","#7dd3fc","#38bdf8",
-      "#0ea5e9","#0284c7","#0369a1","#075985","#0c4a6e"
-    ];
-
+    const wRows = weightsCsv.trim().split("\n").slice(1).map(r => r.split(","));
     Plotly.newPlot("weights", [{
-      type: "pie",
-      labels: tickers,
-      values: values,
-      hole: 0.6,
-      marker: {
-        colors: values.map((_, i) => bluePalette[i % bluePalette.length]),
-        line: { color: "#020617", width: 1 }
-      },
-      textinfo: "label+percent",
-      hoverinfo: "label+value+percent"
+      type: "pie", labels: wRows.map(r => r[0]), values: wRows.map(r => parseFloat(r[1])),
+      hole: 0.6, marker: { colors: ["#e0f2fe","#bae6fd","#7dd3fc","#38bdf8","#0ea5e9","#0284c7","#0369a1"] },
+      textinfo: "label+percent"
     }], {
       title: { text: "Portfolio Allocation", font: { color: "#e5e7eb", size: 18 } },
-      paper_bgcolor: "rgba(0,0,0,0)",
-      plot_bgcolor: "rgba(0,0,0,0)",
-      font: { color: "#e5e7eb" }
+      paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)", font: { color: "#e5e7eb" },
+      margin: { t: 25, b: 0, l: 0, r: 0 }
     });
 
-    // 5️⃣ REWARD DISTRIBUTION
-    const rewards = rewardCsv.trim().split("\n").map(v => parseFloat(v)).filter(v => !isNaN(v));
-    const { nu, mu, sigma } = tFit;
+    // 5️⃣ CORRELATION HEATMAP - FIXED VERSION
+    const corrLines = corrMatrixCsv.trim().split("\n").filter(l => l.trim() !== "");
+    const assetNames = corrLines[0].split(",").map(s => s.trim()).filter(s => s !== "");
+    const zValues = corrLines.slice(1).map(row => {
+        const parts = row.split(",");
+        return parts.slice(1).map(v => parseFloat(v));
+    });
 
-    function gamma(z) {
-      const g = 7;
-      const p = [0.99999999999980993, 676.5203681218851, -1259.1392167224028,
-                 771.32342877765313, -176.61502916214059, 12.507343278686905,
-                 -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7];
-      if (z < 0.5) return Math.PI / (Math.sin(Math.PI * z) * gamma(1 - z));
-      z -= 1; let x = p[0];
-      for (let i = 1; i < g + 2; i++) x += p[i] / (z + i);
-      const t = z + g + 0.5;
-      return Math.sqrt(2 * Math.PI) * t ** (z + 0.5) * Math.exp(-t) * x;
+    // Create annotations for black labels
+    const annotations = [];
+    const n = assetNames.length;
+    
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            annotations.push({
+                x: assetNames[j],
+                y: assetNames[i],
+                text: zValues[i][j].toFixed(3),
+                font: { 
+                    color: 'black',
+                    size: 10,
+                    weight: 'bold',
+                    family: 'Inter'
+                },
+                showarrow: false,
+                xref: 'x',
+                yref: 'y'
+            });
+        }
     }
 
-    const xmin = Math.min(...rewards), xmax = Math.max(...rewards);
-    const xvals = Array.from({ length: 400 }, (_, i) => xmin + (xmax - xmin) * i / 399);
-    const pdf = xvals.map(x => {
-      const z = (x - mu) / sigma;
-      const coef = gamma((nu + 1) / 2) / (Math.sqrt(nu * Math.PI) * sigma * gamma(nu / 2));
-      return coef * (1 + (z * z) / nu) ** (-(nu + 1) / 2);
+    Plotly.newPlot("corrHeatmap", [{
+      z: zValues,
+      x: assetNames,
+      y: assetNames,
+      type: 'heatmap',
+      colorscale: [
+        [0, '#f0f9ff'],    // Very Light blue
+        [0.5, '#bae6fd'],
+        [1, '#0ea5e9']     // Darker blue
+      ],
+      hoverongaps: false,
+      hoverinfo: 'x+y+z',
+      showscale: true,
+      colorbar: {
+        tickfont: { color: '#e5e7eb' },
+        title: { text: 'Correlation', font: { color: '#e5e7eb' } }
+      }
+    }], {
+      paper_bgcolor: "rgba(0,0,0,0)",
+      plot_bgcolor: "rgba(0,0,0,0)",
+      font: { color: "#e5e7eb", size: 10 },
+      margin: { t: 10, b: 80, l: 80, r: 40 },
+      xaxis: { 
+        tickangle: -45, 
+        side: 'bottom',
+        tickfont: { color: '#e5e7eb', size: 10 },
+        showgrid: false
+      },
+      yaxis: { 
+        autorange: 'reversed',
+        tickfont: { color: '#e5e7eb', size: 10 },
+        showgrid: false
+      },
+      annotations: annotations
     });
 
-    const sorted = [...rewards].sort((a, b) => a - b);
-    const median = sorted.length % 2 !== 0 ? sorted[Math.floor(sorted.length / 2)] :
-                   0.5 * (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]);
+    // 6️⃣ REWARD DISTRIBUTION
+    const rewards = rewardCsv.trim().split("\n").map(v => parseFloat(v)).filter(v => !isNaN(v));
+    const { nu, mu, sigma } = tFit;
+    
+    function gamma(z) {
+      const p = [0.99999999999980993, 676.5203681218851, -1259.1392167224028, 771.32342877765313, -176.61502916214059, 12.507343278686905, -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7];
+      let x = p[0]; for (let i = 1; i < 9; i++) x += p[i] / (z + i - 1);
+      const t = z + 7.5; return Math.sqrt(2 * Math.PI) * t ** (z + 0.5) * Math.exp(-t) * x;
+    }
+    const xvals = Array.from({ length: 100 }, (_, i) => -0.05 + 0.1 * i / 99);
+    const pdf = xvals.map(x => (gamma((nu + 1) / 2) / (Math.sqrt(nu * Math.PI) * sigma * gamma(nu / 2))) * (1 + ((x - mu) / sigma) ** 2 / nu) ** (-(nu + 1) / 2));
 
     Plotly.newPlot("rewardDist", [
-      { type: "histogram", x: rewards, nbinsx: 80, histnorm: "probability density",
-        marker: { color: "#38bdf8", line: { color: "#020617", width: 1 } }, opacity: 0.85,
-        name: "Empirical Density" },
-      { type: "scatter", x: xvals, y: pdf, mode: "lines",
-        line: { color: "#f8fafc", width: 2 },
-        name: `Student-t PDF (ν = ${nu.toFixed(2)})` }
+      { type: "histogram", x: rewards, histnorm: "probability density", marker: { color: "#38bdf8", opacity: 0.6 }, name: "Daily Returns" },
+      { type: "scatter", x: xvals, y: pdf, mode: "lines", line: { color: "#f8fafc" }, name: "Student-t Fit" }
     ], {
-      title: { text: "Distribution of Simulated Daily Returns", font: { color: "#e5e7eb", size: 16 } },
       paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)",
-      font: { color: "#e5e7eb" },
-      xaxis: { title: "Daily Return" }, yaxis: { title: "Density" },
-      shapes: [
-        { type: "line", x0: mu, x1: mu, y0: 0, y1: 1, yref: "paper", line: { color: "#94a3b8", width: 2, dash: "dash" } },
-        { type: "line", x0: median, x1: median, y0: 0, y1: 1, yref: "paper", line: { color: "#94a3b8", width: 2, dash: "dot" } }
-      ],
-      annotations: [
-        { x: median, y: 1, yref: "paper", text: "Median", showarrow: false, yanchor: "bottom", font: { color: "#94a3b8", size: 12 } }
-      ]
+      font: { color: "#e5e7eb" }, margin: { t: 30, b: 40, l: 40, r: 10 },
+      legend: { orientation: "h", y: -0.2 }
     });
 
-    // 6️⃣ Update timestamp
-    document.getElementById("timestamp").textContent = new Date(summary.run_date).toLocaleString();
+    // 7️⃣ DYNAMICS WIDGET
+    const numPaths = 100;
+    const horizon = 100;
+    const dynamicsTraces = [];
 
+    for (let i = 0; i < numPaths; i++) {
+        let values = [1];
+        let currentWealth = 1;
+        for (let t = 0; t < horizon; t++) {
+            let r = rand_student_t(nu, mu, sigma);
+            currentWealth = currentWealth * (1 + r);
+            values.push(currentWealth);
+        }
+        dynamicsTraces.push({
+            y: values, type: 'scatter', mode: 'lines',
+            line: { color: '#38bdf8', width: 1, opacity: 0.15 }, 
+            showlegend: false, hoverinfo: 'y'
+        });
+    }
+    // Highlight first trace
+    // dynamicsTraces[0].line.opacity = 0.9; 
+    // dynamicsTraces[0].line.color = '#e5e7eb';
+    // dynamicsTraces[0].line.width = 2;
+
+    Plotly.newPlot("dynamicsPlot", dynamicsTraces, {
+        paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)",
+        font: { color: "#e5e7eb" },
+        margin: { t: 10, b: 30, l: 40, r: 10 },
+        xaxis: { title: 'Days' }, yaxis: { title: 'Wealth Index' },
+        showlegend: false
+    });
+
+    document.getElementById("timestamp").textContent = new Date(summary.run_date).toLocaleString();
   } catch (err) {
     console.error(err);
-    document.getElementById("kpis").innerHTML = "<h2>Error</h2><p class='subtitle'>Failed to load dashboard data.</p>";
+    document.getElementById("kpis").innerHTML = "<h2>Error</h2><p>Data fetch failed.</p>";
   }
 }
-
 loadDashboard();
 </script>
-
 </body>
 </html>

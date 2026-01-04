@@ -188,7 +188,7 @@ if __name__ == "__main__":
 
     # preserve original tickers order and identify removed tickers
     original_tickers = tickers.copy()
-    assets_sorted = [t for t in original_tickers if t in df.columns]
+    assets = [t for t in original_tickers if t in df.columns]
     removed_tickers = [t for t in original_tickers if t not in df.columns]
 
     if removed_tickers:
@@ -202,8 +202,8 @@ if __name__ == "__main__":
     df_daily.index = pd.to_datetime(df_daily.index)
 
     # reorder columns to match original tickers order (filtered)
-    if assets_sorted:
-        df_daily = df_daily[assets_sorted]
+    if assets:
+        df_daily = df_daily[assets]
 
     # 2. FIT STUDENT'S T AND GAUSSIAN COPULA
     n_vars = df_daily.shape[1]
@@ -238,9 +238,6 @@ if __name__ == "__main__":
     sim_final = np.zeros_like(sim_u)
     for i in range(n_vars):
         sim_final[:, i] = t.ppf(sim_u[:, i], *fitted_params[i])
-
-    # use the assets that survived cleaning / aggregation (preserving original order)
-    assets = assets_sorted
 
     df_sim = pd.DataFrame(sim_final, columns=assets)
     df_simulated = pd.DataFrame(sim_final, columns=assets)
@@ -384,7 +381,8 @@ if __name__ == "__main__":
         if np.round(w, 2) > 0.00:
             MSG += f"{tickers[i]} Weight: {w:.2%}\n"
 
-    print(df_simulated[weights_df['ticker']].corr())
+    df_corr_picks = df_simulated[weights_df['ticker']].corr()
+    df_corr_picks.to_csv(LATEST_DIR / "correlation_selected_assets.csv", index=True)
 
     MSG += f"\n---Correlation matrix of selected assets ---\n\n {df_simulated[weights_df['ticker']].corr()}\n"
 
