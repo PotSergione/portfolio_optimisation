@@ -1,15 +1,14 @@
-import yfinance as yf
 import pandas as pd
 import numpy as np
 from scipy.stats import t, norm
 import matplotlib.pyplot as plt
-import seaborn as sns
 from scipy.optimize import minimize
 import datetime
 import os
 from pathlib import Path
 import json
 from send_email import send_email
+from get_data import get_etf_data
 
 
 RUN_DATE = datetime.date.today().isoformat()
@@ -134,23 +133,6 @@ def negative_expected_utility(weights, returns, utility_fn=identity):
     port_returns = returns @ weights
     return -np.mean(utility_fn(port_returns))
 
-
-def get_etf_data(ticker_symbol):
-    try:
-        # Create a ticker object
-        etf = yf.Ticker(ticker_symbol)
-
-        # Get historical market data (daily)
-        # Options for period: 1d, 5d, 1mo, 3mo, 6mo, 1y, 2y, 5y, 10y, ytd, max
-        history = etf.history(period="3y", interval="1d")
-
-        if history.empty:
-            print(f"No data found for ticker: {ticker_symbol}")
-            return
-
-        return history
-    except Exception as e:
-        print(f"An error occurred: {e}")
 
 
 if __name__ == "__main__":
