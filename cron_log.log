@@ -1,0 +1,29 @@
+outputs/latest
+outputs/history/2026-01-05
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.002163771455806913
+            Iterations: 51
+            Function evaluations: 4642
+            Gradient evaluations: 51
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 41.19%
+LYTR.DE Weight: 25.01%
+LYM9.DE Weight: 33.80%
+
+Expected Daily Return: 0.22%
+Daily Volatility: 0.81%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 72.41%
+Annualized Volatility: 12.87%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.9008590390179009
+Simulated Spearman Correlation:
+0.9226468104414087
+Email sent
