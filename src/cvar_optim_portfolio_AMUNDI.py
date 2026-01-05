@@ -4,7 +4,6 @@ from scipy.stats import t, norm
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize
 import datetime
-import os
 from pathlib import Path
 import json
 from send_email import send_email
@@ -162,7 +161,7 @@ if __name__ == "__main__":
     data = {}
     for ticker in tickers:
         data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
-
+        
     df = pd.DataFrame()
     df = df.from_dict(data)
     # drop columns with no data (all NaNs) so tickers list and data align
@@ -210,7 +209,7 @@ if __name__ == "__main__":
     corr_matrix = np.corrcoef(z_data, rowvar=False)
 
     # GENERATE NEW SAMPLES (Simulation)
-    n_sim = int(1e5)
+    n_sim = int(1e6)
     # Simulate correlated normal variables
     sim_z = np.random.multivariate_normal(np.zeros(n_vars), corr_matrix, n_sim)
     # Convert back to Uniform [0, 1]
@@ -218,6 +217,7 @@ if __name__ == "__main__":
 
     # Convert back to original scale using the Inverse CDF (ppf) of Student's t
     sim_final = np.zeros_like(sim_u)
+
     for i in range(n_vars):
         sim_final[:, i] = t.ppf(sim_u[:, i], *fitted_params[i])
 
@@ -367,6 +367,6 @@ if __name__ == "__main__":
     df_corr_picks = df_simulated[weights_df['ticker']].corr()
     df_corr_picks.to_csv(LATEST_DIR / "correlation_selected_assets.csv", index=True)
 
-    MSG += f"\n---Correlation matrix of selected assets ---\n\n {df_simulated[weights_df['ticker']].corr()}\n"
+    MSG += f"\n--- Correlation matrix of selected assets ---\n\n {df_simulated[weights_df['ticker']].corr()}\n"
 
     send_email(MSG)
