@@ -67,3 +67,13 @@ Original Spearman Correlation:
 Simulated Spearman Correlation:
 0.9242467834395449
 Email sent
+[main d2af102] Auto-update: 2026-01-06 06:07
+ 14 files changed, 1000063 insertions(+), 1000016 deletions(-)
+ create mode 100644 outputs/history/2026-01-06/correlation.csv
+ create mode 100644 outputs/history/2026-01-06/metrics.csv
+ create mode 100644 outputs/history/2026-01-06/summary.json
+ create mode 100644 outputs/history/2026-01-06/weights.csv
+ rewrite outputs/latest/forecasted_returns.png (94%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   ffc747e..d2af102  main -> main
