@@ -435,6 +435,12 @@ if __name__ == "__main__":
     df_return_distribution = pd.DataFrame({'realised_returns': simulated_returns})
     df_return_distribution.to_csv(LATEST_DIR / "implied_portfolio_return_distribution.csv", index=False)
 
+    # Remove duplicate timestamps by keeping the first occurrence
+    df_daily = df_daily[~df_daily.index.duplicated(keep='first')]
+
+    # Now call the function
+    print(f"\nHistorical Avg Tail Prob: {check_lower_tail_dependence_robust(df_daily):.4f}")
+    print(f"Simulated Tail Prob:  {check_lower_tail_dependence_robust(df_sim):.4f}")
 
 
     # BUILDING EMAIL MESSAGE TO STREAM RESULTS
@@ -461,14 +467,8 @@ if __name__ == "__main__":
     df_corr_picks.to_csv(LATEST_DIR / "correlation_selected_assets.csv", index=True)
 
     MSG += f"\n--- Correlation matrix of selected assets ---\n\n {df_simulated[weights_df['ticker']].corr()}\n"
-
-
-    # Remove duplicate timestamps by keeping the first occurrence
-    df_daily = df_daily[~df_daily.index.duplicated(keep='first')]
-
-    # Now call the function
-    print(f"\nHistorical Avg Tail Prob: {check_lower_tail_dependence_robust(df_daily):.4f}")
-    print(f"Simulated Tail Prob:  {check_lower_tail_dependence_robust(df_sim):.4f}")
-
+    MSG += f"\nHistorical Avg Tail Prob for 10 pairs: {check_lower_tail_dependence_robust(df_daily):.4f}\n"
+    MSG += f"Simulated Tail Prob for 10 pairs:  {check_lower_tail_dependence_robust(df_sim):.4f}"
+    MSG += "\n\nRegards,\nHybrid CVaR Optimizer Bot"
 
     send_email(MSG)
