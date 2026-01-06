@@ -38,3 +38,32 @@ Email sent
  rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
 To https://github.com/PotSergione/portfolio_optimisation.git
    cae7c31..dea36fb  main -> main
+outputs/latest
+outputs/history/2026-01-06
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.002254427571603738
+            Iterations: 48
+            Function evaluations: 4368
+            Gradient evaluations: 48
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 40.57%
+LYTR.DE Weight: 23.93%
+LYM9.DE Weight: 35.50%
+
+Expected Daily Return: 0.23%
+Daily Volatility: 0.82%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 76.38%
+Annualized Volatility: 12.96%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.9023922868035946
+Simulated Spearman Correlation:
+0.9242467834395449
+Email sent
