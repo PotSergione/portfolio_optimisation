@@ -43,7 +43,6 @@ def test_against_benchmarks(benchmarks :list = [] ):
                 ticker = row['ticker']
                 weight = row['weight']
                 asset_price = get_etf_data(ticker).loc[date]['Close']
-                print(f"Date: {date_str}, Ticker: {ticker}, Weight: {weight}, Asset Price: {asset_price}")
                 if date_str not in portfolio_returns: 
                     portfolio_returns[date_str] = 0.0
                 
@@ -51,8 +50,14 @@ def test_against_benchmarks(benchmarks :list = [] ):
 
     df = pd.DataFrame.from_dict(portfolio_returns, orient='index', columns=['portfolio_value'])
     df_rescaled = df.pct_change().fillna(0.0) + 1.0
+    df_rescaled.index = pd.to_datetime(df_rescaled.index).tz_localize('Europe/Berlin')
 
-    print(returns, df_rescaled)
+    df_benchmarks = pd.DataFrame.from_dict(returns)
+    df_benchmarks['CVAR_STRAT'] = df_rescaled['portfolio_value']
+    # now saving to latest for plotting in dashboard
+
+    LATEST_DIR.mkdir(parents=True, exist_ok=True)
+    df_benchmarks.to_csv(LATEST_DIR / "benchmark_comparison.csv")
 
 
 

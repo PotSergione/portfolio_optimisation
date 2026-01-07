@@ -115,3 +115,13 @@ Simulated Spearman Correlation:
 Historical Avg Tail Prob: 0.4250
 Simulated Tail Prob:  0.4339
 Email sent
+[main b8cec21] Auto-update: 2026-01-07 06:10
+ 14 files changed, 1000075 insertions(+), 1000018 deletions(-)
+ create mode 100644 outputs/history/2026-01-07/correlation.csv
+ create mode 100644 outputs/history/2026-01-07/metrics.csv
+ create mode 100644 outputs/history/2026-01-07/summary.json
+ create mode 100644 outputs/history/2026-01-07/weights.csv
+ rewrite outputs/latest/forecasted_returns.png (93%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   a69f4b4..b8cec21  main -> main

@@ -133,6 +133,14 @@
         </div>
     </section>
 
+    <section class="grid-wide">
+        <div class="card">
+            <h2>Benchmark Comparison</h2>
+            <p class="subtitle">Cumulative performance comparison against key market benchmarks.</p>
+            <div id="benchmarkPlot"></div>
+        </div>
+    </section>
+
     <footer>
       Updated automatically · <span id="timestamp">—</span>
     </footer>
@@ -455,6 +463,53 @@ async function loadDashboard() {
     console.error(err);
     document.getElementById("kpis").innerHTML = "<h2>Error</h2><p>Data fetch failed.</p>";
   }
+
+  // 8️⃣ BENCHMARK COMPARISON PLOT
+    const benchmarkCsv = await fetch("../outputs/latest/benchmark_comparison.csv").then(r => r.text());
+    
+    const benchLines = benchmarkCsv.trim().split("\n").map(line => line.split(","));
+    const headers = benchLines[0]; // Assumes first column is 'Date' or 'Index'
+    const benchData = benchLines.slice(1);
+
+    const benchmarkTraces = [];
+    
+    // We start from index 1 assuming index 0 is the X-axis (Date/Time)
+    for (let j = 1; j < headers.length; j++) {
+        benchmarkTraces.push({
+            x: benchData.map(row => row[0]),
+            y: benchData.map(row => parseFloat(row[j])),
+            name: headers[j],
+            type: 'scatter',
+            mode: 'lines',
+            line: { width: 2 },
+            hovertemplate: `<b>${headers[j]}</b><br>Value: %{y:.4f}<extra></extra>`
+        });
+    }
+
+    Plotly.newPlot("benchmarkPlot", benchmarkTraces, {
+        paper_bgcolor: "rgba(0,0,0,0)",
+        plot_bgcolor: "rgba(0,0,0,0)",
+        font: { color: "#e5e7eb" },
+        margin: { t: 30, b: 60, l: 50, r: 20 },
+        hovermode: 'x unified',
+        xaxis: { 
+            gridcolor: 'rgba(255,255,255,0.1)',
+            tickfont: { size: 10 }
+        },
+        yaxis: { 
+            gridcolor: 'rgba(255,255,255,0.1)',
+            title: 'Normalized Value'
+        },
+        legend: {
+            orientation: 'h',
+            y: -0.3,
+            x: 0.5,
+            xanchor: 'center',
+            font: { color: '#e5e7eb' }
+        },
+        colorway: ['#38bdf8', '#a5b4fc', '#818cf8', '#fb7185', '#34d399', '#fbbf24']
+    });
+
 }
 loadDashboard();
 </script>
