@@ -77,3 +77,41 @@ Email sent
  rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
 To https://github.com/PotSergione/portfolio_optimisation.git
    ffc747e..d2af102  main -> main
+outputs/latest
+outputs/history/2026-01-07
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.95
+Simulating 1000000 scenarios with nu=3.95...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0021877578649927964
+            Iterations: 69
+            Function evaluations: 6279
+            Gradient evaluations: 69
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 33.70%
+EGV5.DE Weight: 2.24%
+LYTR.DE Weight: 27.73%
+LYM9.DE Weight: 36.32%
+
+Expected Daily Return: 0.22%
+Daily Volatility: 0.80%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 73.45%
+Annualized Volatility: 12.68%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.9014520560159813
+Simulated Spearman Correlation:
+0.8989124938458335
+
+Historical Avg Tail Prob: 0.4250
+Simulated Tail Prob:  0.4339
+Email sent
