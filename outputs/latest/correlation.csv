@@ -1,2 +1,2 @@
-original_spearman,simulated_spearman
-0.9014520560159813,0.8989124938458335
+original_spearman,simulated_spearman,lower_5pcnt_historic_tail_dep,lower_5pcnt_simulated_tail_dep
+0.9015937259750497,0.899428335058033,0.425,0.43323

@@ -406,6 +406,8 @@ if __name__ == "__main__":
     "original_spearman": [df_daily.corr(method="spearman").iloc[0,1]],
     "simulated_spearman": [df_sim.corr(method="spearman").iloc[0,1]]
     })
+    corr_df["lower_5pcnt_historic_tail_dep"] = check_lower_tail_dependence_robust(df_daily)
+    corr_df["lower_5pcnt_simulated_tail_dep"] = check_lower_tail_dependence_robust(df_sim)
 
     corr_df.to_csv(LATEST_DIR / "correlation.csv", index=False)
     corr_df.to_csv(HISTORY_DIR / "correlation.csv", index=False)
@@ -456,7 +458,9 @@ if __name__ == "__main__":
     "\nOriginal Spearman Correlation:\n" +\
     f"{df_daily.corr(method='spearman').iloc[0,1]}\n"+\
     "Simulated Spearman Correlation:\n"+\
-    f"{df_sim.corr(method='spearman').iloc[0,1]}\n"+\
+    f"{df_sim.corr(method='spearman').iloc[0,1]}\n"
+    MSG += f"\nHistorical Avg Tail Prob for 10 pairs: {check_lower_tail_dependence_robust(df_daily):.4f}\n"
+    MSG += f"Simulated Avg Tail Prob for 10 pairs:  {check_lower_tail_dependence_robust(df_sim):.4f}" +\
     "\n--- Optimal picks ---\n\n"
 
     for i, w in enumerate(opt_weights):
@@ -467,8 +471,6 @@ if __name__ == "__main__":
     df_corr_picks.to_csv(LATEST_DIR / "correlation_selected_assets.csv", index=True)
 
     MSG += f"\n--- Correlation matrix of selected assets ---\n\n {df_simulated[weights_df['ticker']].corr()}\n"
-    MSG += f"\nHistorical Avg Tail Prob for 10 pairs: {check_lower_tail_dependence_robust(df_daily):.4f}\n"
-    MSG += f"Simulated Tail Prob for 10 pairs:  {check_lower_tail_dependence_robust(df_sim):.4f}"
     MSG += "\n\nRegards,\nHybrid CVaR Optimizer Bot"
 
     send_email(MSG)
