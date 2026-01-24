@@ -1051,3 +1051,100 @@ Simulated Spearman Correlation:
 Historical Avg Tail Prob: 0.4444
 Simulated Tail Prob:  0.4387
 Email sent
+[main f7f23d3] Auto-update: 2026-01-23 06:11
+ 15 files changed, 1000087 insertions(+), 1000019 deletions(-)
+ create mode 100644 outputs/history/2026-01-23/correlation.csv
+ create mode 100644 outputs/history/2026-01-23/metrics.csv
+ create mode 100644 outputs/history/2026-01-23/summary.json
+ create mode 100644 outputs/history/2026-01-23/weights.csv
+ rewrite outputs/latest/forecasted_returns.png (92%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   c546764..f7f23d3  main -> main
+outputs/latest
+outputs/history/2026-01-24
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.90
+Simulating 1000000 scenarios with nu=3.90...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0022350446949149175
+            Iterations: 57
+            Function evaluations: 5187
+            Gradient evaluations: 57
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 28.20%
+EGV5.DE Weight: 1.03%
+LYTR.DE Weight: 32.32%
+LYM9.DE Weight: 38.45%
+
+Expected Daily Return: 0.22%
+Daily Volatility: 0.78%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 75.52%
+Annualized Volatility: 12.46%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.9048058160871125
+Simulated Spearman Correlation:
+0.8997911226516937
+
+Historical Avg Tail Prob: 0.4333
+Simulated Tail Prob:  0.4357
+Email sent
+Traceback (most recent call last):
+  File "pandas/_libs/index.pyx", line 627, in pandas._libs.index.DatetimeEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 2606, in pandas._libs.hashtable.Int64HashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 2630, in pandas._libs.hashtable.Int64HashTable.get_item
+KeyError: 1768950000000000000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 595, in pandas._libs.index.DatetimeEngine.get_loc
+  File "pandas/_libs/index.pyx", line 629, in pandas._libs.index.DatetimeEngine.get_loc
+KeyError: Timestamp('2026-01-21 00:00:00+0100', tz='Europe/Berlin')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/indexes/datetimes.py", line 630, in get_loc
+    return Index.get_loc(self, key)
+           ~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: Timestamp('2026-01-21 00:00:00+0100', tz='Europe/Berlin')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 66, in <module>
+    test_against_benchmarks(["AUM5.DE", "F500.DE", "EMXC.DE"])
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 45, in test_against_benchmarks
+    asset_price = get_etf_data(ticker).loc[date]['Close']
+                  ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/indexing.py", line 1192, in __getitem__
+    return self._getitem_axis(maybe_callable, axis=axis)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/indexing.py", line 1432, in _getitem_axis
+    return self._get_label(key, axis=axis)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/indexing.py", line 1382, in _get_label
+    return self.obj.xs(label, axis=axis)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/generic.py", line 4323, in xs
+    loc = index.get_loc(key)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/indexes/datetimes.py", line 632, in get_loc
+    raise KeyError(orig_key) from err
+KeyError: Timestamp('2026-01-21 00:00:00+0100', tz='Europe/Berlin')
