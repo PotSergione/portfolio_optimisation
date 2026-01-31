@@ -1537,3 +1537,51 @@ Simulated Spearman Correlation:
 Historical Avg Tail Prob: 0.4444
 Simulated Tail Prob:  0.4340
 Email sent
+[main 11bbf02] Auto-update: 2026-01-30 06:09
+ 15 files changed, 1000086 insertions(+), 1000018 deletions(-)
+ create mode 100644 outputs/history/2026-01-30/correlation.csv
+ create mode 100644 outputs/history/2026-01-30/metrics.csv
+ create mode 100644 outputs/history/2026-01-30/summary.json
+ create mode 100644 outputs/history/2026-01-30/weights.csv
+ rewrite outputs/latest/forecasted_returns.png (93%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   30e2228..11bbf02  main -> main
+outputs/latest
+outputs/history/2026-01-31
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 4.04
+Simulating 1000000 scenarios with nu=4.04...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0022241724650385163
+            Iterations: 62
+            Function evaluations: 5644
+            Gradient evaluations: 62
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 31.41%
+EGV5.DE Weight: 2.49%
+LYTR.DE Weight: 26.98%
+LYM9.DE Weight: 39.11%
+
+Expected Daily Return: 0.22%
+Daily Volatility: 0.78%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 75.04%
+Annualized Volatility: 12.43%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.9055325765850807
+Simulated Spearman Correlation:
+0.9018239110587796
+
+Historical Avg Tail Prob: 0.4444
+Simulated Tail Prob:  0.4333
+Email sent
