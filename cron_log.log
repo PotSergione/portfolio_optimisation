@@ -2253,3 +2253,55 @@ Traceback (most recent call last):
     asset_price = get_etf_data(ticker).loc[date]['Close']
                   ^^^^^^^^^^^^^^^^^^^^^^^^
 AttributeError: 'NoneType' object has no attribute 'loc'
+[main 742b60b] Auto-update: 2026-02-15 06:10
+ 14 files changed, 1000109 insertions(+), 1000028 deletions(-)
+ create mode 100644 outputs/history/2026-02-15/correlation.csv
+ create mode 100644 outputs/history/2026-02-15/metrics.csv
+ create mode 100644 outputs/history/2026-02-15/summary.json
+ create mode 100644 outputs/history/2026-02-15/weights.csv
+ rewrite outputs/latest/correlation_selected_assets.csv (100%)
+ rewrite outputs/latest/forecasted_returns.png (93%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   40b7b86..742b60b  main -> main
+outputs/latest
+outputs/history/2026-02-16
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 4.08
+Simulating 1000000 scenarios with nu=4.08...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.002037685475216336
+            Iterations: 66
+            Function evaluations: 6007
+            Gradient evaluations: 66
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 15.15%
+LYQ3.DE Weight: 2.73%
+EGV5.DE Weight: 3.68%
+LYTR.DE Weight: 16.34%
+LYM9.DE Weight: 55.27%
+WELW.DE Weight: 3.55%
+DJAD.DE Weight: 3.27%
+
+Expected Daily Return: 0.20%
+Daily Volatility: 0.78%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 67.03%
+Annualized Volatility: 12.38%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.9089389838514057
+Simulated Spearman Correlation:
+0.9041019491038194
+
+Historical Avg Tail Prob: 0.4333
+Simulated Tail Prob:  0.4309
+Email sent
