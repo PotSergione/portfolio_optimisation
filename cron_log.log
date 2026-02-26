@@ -2728,3 +2728,48 @@ Email sent
 To https://github.com/PotSergione/portfolio_optimisation.git
    e71dc85..488ee4a  main -> main
 /home/sergio/automate_portfolio.sh: line 8: 789655 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py
+[main 4de5a41] Auto-update: 2026-02-25 06:00
+ 2 files changed, 13 insertions(+)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   488ee4a..4de5a41  main -> main
+outputs/latest
+outputs/history/2026-02-26
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.98
+Simulating 1000000 scenarios with nu=3.98...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.002207944292780458
+            Iterations: 59
+            Function evaluations: 5370
+            Gradient evaluations: 59
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 15.29%
+EGV5.DE Weight: 1.67%
+LYTR.DE Weight: 17.31%
+KX1G.DE Weight: 2.13%
+LYM9.DE Weight: 54.37%
+WELW.DE Weight: 2.97%
+DJAD.DE Weight: 6.12%
+
+Expected Daily Return: 0.22%
+Daily Volatility: 0.79%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 74.33%
+Annualized Volatility: 12.51%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.9130698737658269
+Simulated Spearman Correlation:
+0.9083133364190235
+
+Historical Avg Tail Prob: 0.4400
+Simulated Tail Prob:  0.4358
+Email sent
