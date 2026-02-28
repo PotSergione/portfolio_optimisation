@@ -2823,3 +2823,143 @@ Simulated Spearman Correlation:
 Historical Avg Tail Prob: 0.4400
 Simulated Tail Prob:  0.4356
 Email sent
+[main 63e1bcf] Auto-update: 2026-02-27 06:11
+ 15 files changed, 1000093 insertions(+), 1000028 deletions(-)
+ create mode 100644 outputs/history/2026-02-27/correlation.csv
+ create mode 100644 outputs/history/2026-02-27/metrics.csv
+ create mode 100644 outputs/history/2026-02-27/summary.json
+ create mode 100644 outputs/history/2026-02-27/weights.csv
+ rewrite outputs/latest/correlation_selected_assets.csv (100%)
+ rewrite outputs/latest/forecasted_returns.png (93%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   81aa99c..63e1bcf  main -> main
+outputs/latest
+outputs/history/2026-02-28
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 4.01
+Simulating 1000000 scenarios with nu=4.01...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0021474827818502144
+            Iterations: 66
+            Function evaluations: 6007
+            Gradient evaluations: 66
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 13.64%
+LYTR.DE Weight: 17.96%
+NADB.DE Weight: 0.62%
+LYM9.DE Weight: 54.80%
+WELW.DE Weight: 4.24%
+DJAD.DE Weight: 8.65%
+
+Expected Daily Return: 0.21%
+Daily Volatility: 0.79%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 71.70%
+Annualized Volatility: 12.49%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.9135705253458757
+Simulated Spearman Correlation:
+0.9082073008588225
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py", line 435, in <module>
+    simulated_returns = plot_return_distributions(df_simulated, nonzero_weights)
+  File "/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py", line 87, in plot_return_distributions
+    plt.savefig(LATEST_DIR / "implied_portfolio_return_distribution.png")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/pyplot.py", line 1250, in savefig
+    res = fig.savefig(*args, **kwargs)  # type: ignore[func-returns-value]
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/figure.py", line 3490, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/backend_bases.py", line 2186, in print_figure
+    result = print_method(
+        filename,
+    ...<3 lines>...
+        bbox_inches_restore=_bbox_inches_restore,
+        **kwargs)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/backend_bases.py", line 2042, in <lambda>
+    print_method = functools.wraps(meth)(lambda *args, **kwargs: meth(
+                                                                 ~~~~^
+        *args, **{k: v for k, v in kwargs.items() if k not in skip}))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/backends/backend_agg.py", line 481, in print_png
+    self._print_pil(filename_or_obj, "png", pil_kwargs, metadata)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/backends/backend_agg.py", line 429, in _print_pil
+    FigureCanvasAgg.draw(self)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/backends/backend_agg.py", line 382, in draw
+    self.figure.draw(self.renderer)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/artist.py", line 94, in draw_wrapper
+    result = draw(artist, renderer, *args, **kwargs)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/artist.py", line 71, in draw_wrapper
+    return draw(artist, renderer)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/figure.py", line 3257, in draw
+    mimage._draw_list_compositing_images(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        renderer, self, artists, self.suppressComposite)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/image.py", line 134, in _draw_list_compositing_images
+    a.draw(renderer)
+    ~~~~~~^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/artist.py", line 71, in draw_wrapper
+    return draw(artist, renderer)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/axes/_base.py", line 3190, in draw
+    self._update_title_position(renderer)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/axes/_base.py", line 3144, in _update_title_position
+    if title.get_window_extent(renderer).ymin < top:
+       ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/text.py", line 969, in get_window_extent
+    bbox, info, descent = self._get_layout(self._renderer)
+                          ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/text.py", line 373, in _get_layout
+    _, lp_h, lp_d = _get_text_metrics_with_cache(
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        renderer, "lp", self._fontproperties,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        ismath="TeX" if self.get_usetex() else False,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        dpi=self.get_figure(root=True).dpi)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/text.py", line 69, in _get_text_metrics_with_cache
+    return _get_text_metrics_with_cache_impl(
+        weakref.ref(renderer), text, fontprop.copy(), ismath, dpi)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/text.py", line 77, in _get_text_metrics_with_cache_impl
+    return renderer_ref().get_text_width_height_descent(text, fontprop, ismath)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/backends/backend_agg.py", line 218, in get_text_width_height_descent
+    font = self._prepare_font(prop)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/backends/backend_agg.py", line 252, in _prepare_font
+    font = get_font(_fontManager._find_fonts_by_props(font_prop))
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/font_manager.py", line 1417, in _find_fonts_by_props
+    self.findfont(
+    ~~~~~~~~~~~~~^
+        cprop, fontext, directory,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        fallback_to_default=False,  # don't fallback to default
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        rebuild_if_missing=rebuild_if_missing,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/font_manager.py", line 1352, in findfont
+    ret = self._findfont_cached(
+        prop, fontext, directory, fallback_to_default, rebuild_if_missing,
+        rc_params)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/font_manager.py", line 1482, in _findfont_cached
+    + self.score_size(prop.get_size(), font.size))
+      ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'FontManager' object is not callable
