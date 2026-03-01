@@ -2963,3 +2963,50 @@ Traceback (most recent call last):
     + self.score_size(prop.get_size(), font.size))
       ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: 'FontManager' object is not callable
+[main 7851ad2] Auto-update: 2026-02-28 06:09
+ 10 files changed, 180 insertions(+), 15 deletions(-)
+ create mode 100644 outputs/history/2026-02-28/correlation.csv
+ create mode 100644 outputs/history/2026-02-28/metrics.csv
+ create mode 100644 outputs/history/2026-02-28/summary.json
+ create mode 100644 outputs/history/2026-02-28/weights.csv
+To https://github.com/PotSergione/portfolio_optimisation.git
+   63e1bcf..7851ad2  main -> main
+outputs/latest
+outputs/history/2026-03-01
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 4.01
+Simulating 1000000 scenarios with nu=4.01...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.002135941798442119
+            Iterations: 61
+            Function evaluations: 5552
+            Gradient evaluations: 61
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 13.25%
+LYTR.DE Weight: 17.89%
+LYM9.DE Weight: 54.79%
+WELW.DE Weight: 4.13%
+DJAD.DE Weight: 9.58%
+
+Expected Daily Return: 0.21%
+Daily Volatility: 0.78%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 71.20%
+Annualized Volatility: 12.44%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.9135705253458757
+Simulated Spearman Correlation:
+0.9079456324241683
+
+Historical Avg Tail Prob: 0.4400
+Simulated Tail Prob:  0.4346
+Email sent
