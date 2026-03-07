@@ -3256,3 +3256,14 @@ Simulated Spearman Correlation:
 Historical Avg Tail Prob: 0.4500
 Simulated Tail Prob:  0.4407
 Email sent
+[main edc5fd8] Auto-update: 2026-03-06 06:17
+ 15 files changed, 1000086 insertions(+), 1000018 deletions(-)
+ create mode 100644 outputs/history/2026-03-06/correlation.csv
+ create mode 100644 outputs/history/2026-03-06/metrics.csv
+ create mode 100644 outputs/history/2026-03-06/summary.json
+ create mode 100644 outputs/history/2026-03-06/weights.csv
+ rewrite outputs/latest/forecasted_returns.png (92%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   5d9613f..edc5fd8  main -> main
+/home/sergio/automate_portfolio.sh: line 8: 488227 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py
