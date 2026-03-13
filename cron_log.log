@@ -3445,3 +3445,54 @@ Historical Avg Tail Prob: 0.4500
 Simulated Tail Prob:  0.4439
 Email sent
 /home/sergio/automate_portfolio.sh: line 11: 11725 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/benchmark_portfolio.py
+[main b5c5776] Auto-update: 2026-03-12 06:10
+ 14 files changed, 1000101 insertions(+), 1000024 deletions(-)
+ create mode 100644 outputs/history/2026-03-12/correlation.csv
+ create mode 100644 outputs/history/2026-03-12/metrics.csv
+ create mode 100644 outputs/history/2026-03-12/summary.json
+ create mode 100644 outputs/history/2026-03-12/weights.csv
+ rewrite outputs/latest/correlation_selected_assets.csv (100%)
+ rewrite outputs/latest/forecasted_returns.png (93%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (98%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   d8215ba..b5c5776  main -> main
+outputs/latest
+outputs/history/2026-03-13
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.78
+Simulating 1000000 scenarios with nu=3.78...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0020271983993923057
+            Iterations: 68
+            Function evaluations: 6188
+            Gradient evaluations: 68
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 9.22%
+LYQ3.DE Weight: 1.98%
+EGV5.DE Weight: 3.69%
+LYTR.DE Weight: 20.66%
+LYM9.DE Weight: 50.68%
+DJAD.DE Weight: 13.42%
+
+Expected Daily Return: 0.20%
+Daily Volatility: 0.77%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 66.59%
+Annualized Volatility: 12.15%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.9108246896195465
+Simulated Spearman Correlation:
+0.9039548916431421
+
+Historical Avg Tail Prob: 0.4600
+Simulated Tail Prob:  0.4447
+Email sent
