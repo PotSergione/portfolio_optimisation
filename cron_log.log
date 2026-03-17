@@ -3798,3 +3798,55 @@ Traceback (most recent call last):
   File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/indexes/datetimes.py", line 632, in get_loc
     raise KeyError(orig_key) from err
 KeyError: Timestamp('2026-03-12 00:00:00+0100', tz='Europe/Berlin')
+[main 6da50d1] Auto-update: 2026-03-16 06:10
+ 14 files changed, 1000145 insertions(+), 1000026 deletions(-)
+ create mode 100644 outputs/history/2026-03-16/correlation.csv
+ create mode 100644 outputs/history/2026-03-16/metrics.csv
+ create mode 100644 outputs/history/2026-03-16/summary.json
+ create mode 100644 outputs/history/2026-03-16/weights.csv
+ rewrite outputs/latest/correlation_selected_assets.csv (100%)
+ rewrite outputs/latest/forecasted_returns.png (93%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (98%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   4d347d2..6da50d1  main -> main
+outputs/latest
+outputs/history/2026-03-17
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.88
+Simulating 1000000 scenarios with nu=3.88...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0019571580345794006
+            Iterations: 64
+            Function evaluations: 5825
+            Gradient evaluations: 64
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 6.11%
+LYQ3.DE Weight: 0.51%
+EGV5.DE Weight: 3.33%
+LYTR.DE Weight: 25.47%
+INDA.DE Weight: 3.22%
+LYM9.DE Weight: 46.53%
+DJAD.DE Weight: 14.83%
+
+Expected Daily Return: 0.20%
+Daily Volatility: 0.76%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 63.68%
+Annualized Volatility: 12.06%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.9111036658166093
+Simulated Spearman Correlation:
+0.9051039959643231
+
+Historical Avg Tail Prob: 0.4200
+Simulated Tail Prob:  0.4467
+Email sent
