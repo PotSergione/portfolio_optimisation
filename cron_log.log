@@ -3901,3 +3901,47 @@ Current thread 0x0000727260d22440 (most recent call first):
 
 Extension modules: numpy._core._multiarray_umath, numpy.linalg._umath_linalg, pyarrow.lib, numpy.random._common, numpy.random.bit_generator, numpy.random._bounded_integers, numpy.random._pcg64, numpy.random._mt19937, numpy.random._generator, numpy.random._philox, numpy.random._sfc64, numpy.random.mtrand, pandas._libs.tslibs.ccalendar, pandas._libs.tslibs.np_datetime, pandas._libs.tslibs.dtypes, pandas._libs.tslibs.base, pandas._libs.tslibs.nattype, pandas._libs.tslibs.timezones, pandas._libs.tslibs.fields, pandas._libs.tslibs.timedeltas, pandas._libs.tslibs.tzconversion, pandas._libs.tslibs.timestamps, pandas._libs.properties, pandas._libs.tslibs.offsets, pandas._libs.tslibs.strptime, pandas._libs.tslibs.parsing, pandas._libs.tslibs.conversion, pandas._libs.tslibs.period, pandas._libs.tslibs.vectorized, pandas._libs.ops_dispatch, pandas._libs.missing, pandas._libs.hashtable, pandas._libs.algos, pandas._libs.interval, pandas._libs.lib, pyarrow._compute, pandas._libs.ops, pandas._libs.hashing, pandas._libs.arrays, pandas._libs.tslib, pandas._libs.sparse, pandas._libs.internals, pandas._libs.indexing, pandas._libs.index, pandas._libs.writers, pandas._libs.join, pandas._libs.window.aggregations, pandas._libs.window.indexers, pandas._libs.reshape, pandas._libs.groupby, pandas._libs.json, pandas._libs.parsers, pandas._libs.testing, scipy._lib._ccallback_c, charset_normalizer.md, scipy.sparse._sparsetools, _csparsetools, _cyutility, scipy._cyutility, scipy.sparse._csparsetools, scipy.spatial._ckdtree, scipy._lib.messagestream, scipy.linalg._fblas, scipy.linalg._flapack, scipy.linalg.cython_lapack, scipy.linalg._cythonized_array_utils, scipy.linalg._solve_toeplitz, scipy.linalg._decomp_lu_cython, scipy.linalg._matfuncs_schur_sqrtm, scipy.linalg._matfuncs_expm, scipy.linalg._linalg_pythran, scipy.linalg.cython_blas, scipy.linalg._decomp_update, scipy.spatial._qhull, scipy.spatial._voronoi, scipy.special._ufuncs_cxx, scipy.special._ellip_harm_2, scipy.special._special_ufuncs, scipy.special._gufuncs, scipy.special._ufuncs, scipy.special._specfun, scipy.special._comb, scipy.spatial._hausdorff, scipy.spatial._distance_wrap, scipy.spatial.transform._rotation, scipy.spatial.transform._rigid_transform, scipy.sparse.linalg._dsolve._superlu, scipy.sparse.linalg._eigen.arpack._arpack, scipy.sparse.linalg._propack._spropack, scipy.sparse.linalg._propack._dpropack, scipy.sparse.linalg._propack._cpropack, scipy.sparse.linalg._propack._zpropack, scipy.optimize._group_columns, scipy.optimize._trlib._trlib, scipy.optimize._lbfgsb, _moduleTNC, scipy.optimize._moduleTNC, scipy.optimize._slsqplib, scipy.optimize._minpack, scipy.optimize._lsq.givens_elimination, scipy.optimize._zeros, scipy._lib._uarray._uarray, scipy.linalg._decomp_interpolative, scipy.optimize._bglu_dense, scipy.optimize._lsap, scipy.optimize._direct, scipy.integrate._odepack, scipy.integrate._quadpack, scipy.integrate._vode, scipy.integrate._dop, scipy.integrate._lsoda, scipy.interpolate._fitpack, scipy.interpolate._dfitpack, scipy.interpolate._dierckx, scipy.interpolate._ppoly, scipy.interpolate._interpnd, scipy.interpolate._rbfinterp_pythran, scipy.interpolate._rgi_cython, scipy.special.cython_special, scipy.stats._stats (total: 120)
 /home/sergio/automate_portfolio.sh: line 8: 1213543 Aborted                 (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py
+[main 7288245] Auto-update: 2026-03-18 06:00
+ 2 files changed, 52 insertions(+)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   294a705..7288245  main -> main
+outputs/latest
+outputs/history/2026-03-19
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.87
+Simulating 1000000 scenarios with nu=3.87...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.001998626054871024
+            Iterations: 70
+            Function evaluations: 6371
+            Gradient evaluations: 70
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 6.98%
+EGV5.DE Weight: 3.34%
+LYTR.DE Weight: 24.69%
+INDA.DE Weight: 3.73%
+LYM9.DE Weight: 46.78%
+DJAD.DE Weight: 14.45%
+
+Expected Daily Return: 0.20%
+Daily Volatility: 0.76%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 65.39%
+Annualized Volatility: 12.09%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.9111338451209474
+Simulated Spearman Correlation:
+0.9051645515734325
+
+Historical Avg Tail Prob: 0.4455
+Simulated Tail Prob:  0.4491
+Email sent
