@@ -5486,3 +5486,64 @@ Traceback (most recent call last):
   File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/indexes/datetimes.py", line 632, in get_loc
     raise KeyError(orig_key) from err
 KeyError: Timestamp('2026-04-01 00:00:00+0200', tz='Europe/Berlin')
+[main 8375b11] Auto-update: 2026-04-04 06:11
+ 14 files changed, 1000146 insertions(+), 1000023 deletions(-)
+ create mode 100644 outputs/history/2026-04-04/correlation.csv
+ create mode 100644 outputs/history/2026-04-04/metrics.csv
+ create mode 100644 outputs/history/2026-04-04/summary.json
+ create mode 100644 outputs/history/2026-04-04/weights.csv
+ rewrite outputs/latest/correlation_selected_assets.csv (93%)
+ rewrite outputs/latest/forecasted_returns.png (93%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   d540729..8375b11  main -> main
+/home/sergio/automate_portfolio.sh: line 8: 3280776 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py
+Traceback (most recent call last):
+  File "pandas/_libs/index.pyx", line 627, in pandas._libs.index.DatetimeEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 2606, in pandas._libs.hashtable.Int64HashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 2630, in pandas._libs.hashtable.Int64HashTable.get_item
+KeyError: 1774994400000000000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 595, in pandas._libs.index.DatetimeEngine.get_loc
+  File "pandas/_libs/index.pyx", line 629, in pandas._libs.index.DatetimeEngine.get_loc
+KeyError: Timestamp('2026-04-01 00:00:00+0200', tz='Europe/Berlin')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/indexes/datetimes.py", line 630, in get_loc
+    return Index.get_loc(self, key)
+           ~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: Timestamp('2026-04-01 00:00:00+0200', tz='Europe/Berlin')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 66, in <module>
+    test_against_benchmarks(["AUM5.DE", "F500.DE", "EMXC.DE"])
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 45, in test_against_benchmarks
+    asset_price = get_etf_data(ticker).loc[date]['Close']
+                  ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/indexing.py", line 1192, in __getitem__
+    return self._getitem_axis(maybe_callable, axis=axis)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/indexing.py", line 1432, in _getitem_axis
+    return self._get_label(key, axis=axis)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/indexing.py", line 1382, in _get_label
+    return self.obj.xs(label, axis=axis)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/generic.py", line 4323, in xs
+    loc = index.get_loc(key)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/indexes/datetimes.py", line 632, in get_loc
+    raise KeyError(orig_key) from err
+KeyError: Timestamp('2026-04-01 00:00:00+0200', tz='Europe/Berlin')
