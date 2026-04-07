@@ -5601,3 +5601,46 @@ Traceback (most recent call last):
   File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/indexes/datetimes.py", line 632, in get_loc
     raise KeyError(orig_key) from err
 KeyError: Timestamp('2026-04-01 00:00:00+0200', tz='Europe/Berlin')
+[main 9446037] Auto-update: 2026-04-06 06:00
+ 1 file changed, 54 insertions(+)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   06b8432..9446037  main -> main
+outputs/latest
+outputs/history/2026-04-07
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.81
+Simulating 1000000 scenarios with nu=3.81...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0019187406931048363
+            Iterations: 85
+            Function evaluations: 7736
+            Gradient evaluations: 85
+
+--- Optimal Hybrid Portfolio ---
+
+EGV5.DE Weight: 8.04%
+LYTR.DE Weight: 29.18%
+INDA.DE Weight: 10.77%
+LYM9.DE Weight: 41.25%
+DJAD.DE Weight: 10.76%
+
+Expected Daily Return: 0.19%
+Daily Volatility: 0.76%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 62.10%
+Annualized Volatility: 12.02%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.9139672832100781
+Simulated Spearman Correlation:
+0.9078134542037696
+
+Historical Avg Tail Prob: 0.4364
+Simulated Tail Prob:  0.4641
+Email sent
