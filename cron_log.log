@@ -5694,3 +5694,31 @@ Simulated Spearman Correlation:
 Historical Avg Tail Prob: 0.4091
 Simulated Tail Prob:  0.4656
 Email sent
+[main eca5364] Auto-update: 2026-04-08 06:11
+ 15 files changed, 1000092 insertions(+), 1000021 deletions(-)
+ create mode 100644 outputs/history/2026-04-08/correlation.csv
+ create mode 100644 outputs/history/2026-04-08/metrics.csv
+ create mode 100644 outputs/history/2026-04-08/summary.json
+ create mode 100644 outputs/history/2026-04-08/weights.csv
+ rewrite outputs/latest/correlation_selected_assets.csv (91%)
+ rewrite outputs/latest/forecasted_returns.png (93%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   8d89b58..eca5364  main -> main
+outputs/latest
+outputs/history/2026-04-09
+An error occurred: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py", line 198, in <module>
+    data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+                   ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+An error occurred: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 66, in <module>
+    test_against_benchmarks(["AUM5.DE", "F500.DE", "EMXC.DE"])
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 26, in test_against_benchmarks
+    data = get_etf_data(benchmark)['Close']
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
