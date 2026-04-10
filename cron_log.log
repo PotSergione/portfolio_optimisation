@@ -5722,3 +5722,23 @@ Traceback (most recent call last):
     data = get_etf_data(benchmark)['Close']
            ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
 TypeError: 'NoneType' object is not subscriptable
+[main 11af8d6] Auto-update: 2026-04-09 06:00
+ 1 file changed, 28 insertions(+)
+fatal: unable to access 'https://github.com/PotSergione/portfolio_optimisation.git/': Could not resolve host: github.com
+outputs/latest
+outputs/history/2026-04-10
+An error occurred: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py", line 198, in <module>
+    data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+                   ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+An error occurred: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 66, in <module>
+    test_against_benchmarks(["AUM5.DE", "F500.DE", "EMXC.DE"])
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 26, in test_against_benchmarks
+    data = get_etf_data(benchmark)['Close']
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
