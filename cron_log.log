@@ -5742,3 +5742,237 @@ Traceback (most recent call last):
     data = get_etf_data(benchmark)['Close']
            ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
 TypeError: 'NoneType' object is not subscriptable
+[main 1608f50] Auto-update: 2026-04-10 06:00
+ 1 file changed, 20 insertions(+)
+fatal: unable to access 'https://github.com/PotSergione/portfolio_optimisation.git/': Could not resolve host: github.com
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+outputs/latest
+outputs/history/2026-04-11
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.62
+Simulating 1000000 scenarios with nu=3.62...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0019148391126334395
+            Iterations: 76
+            Function evaluations: 6917
+            Gradient evaluations: 76
+
+--- Optimal Hybrid Portfolio ---
+
+EGV5.DE Weight: 15.29%
+LYTR.DE Weight: 28.82%
+INDA.DE Weight: 14.56%
+LYM9.DE Weight: 37.33%
+DJAD.DE Weight: 4.00%
+
+Expected Daily Return: 0.19%
+Daily Volatility: 0.75%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 61.94%
+Annualized Volatility: 11.96%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.9151541574672206
+Simulated Spearman Correlation:
+0.9092304508138066
+
+Historical Avg Tail Prob: 0.4091
+Simulated Tail Prob:  0.4720
+Email sent
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 66, in <module>
+    test_against_benchmarks(["AUM5.DE", "F500.DE", "EMXC.DE"])
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 38, in test_against_benchmarks
+    portfolio_data = pd.read_csv(BASE_OUTPUT / "history" / date_str / "weights.csv")
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
