@@ -6953,3 +6953,77 @@ Traceback (most recent call last):
         newline="",
     )
 FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
+[main 8b7c6ab] Auto-update: 2026-04-18 06:00
+ 1 file changed, 48 insertions(+)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   27e4c32..8b7c6ab  main -> main
+outputs/latest
+outputs/history/2026-04-19
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.49
+Simulating 1000000 scenarios with nu=3.49...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.001959613298589194
+            Iterations: 79
+            Function evaluations: 7191
+            Gradient evaluations: 79
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 8.28%
+EGV5.DE Weight: 14.80%
+LYTR.DE Weight: 28.89%
+INDA.DE Weight: 6.68%
+LYM9.DE Weight: 37.85%
+DJAD.DE Weight: 3.51%
+
+Expected Daily Return: 0.20%
+Daily Volatility: 0.75%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 63.78%
+Annualized Volatility: 11.97%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.9163552460595182
+Simulated Spearman Correlation:
+0.9093031527229524
+
+Historical Avg Tail Prob: 0.4333
+Simulated Tail Prob:  0.4776
+Email sent
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 66, in <module>
+    test_against_benchmarks(["AUM5.DE", "F500.DE", "EMXC.DE"])
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 38, in test_against_benchmarks
+    portfolio_data = pd.read_csv(BASE_OUTPUT / "history" / date_str / "weights.csv")
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
