@@ -10834,3 +10834,47 @@ Traceback (most recent call last):
     charsetappend((op, av))
     ~~~~~~~~~~~~~^^^^^^^^^^
 TypeError: 'SubPattern' object is not callable
+[main acd9474] Auto-update: 2026-05-15 06:00
+ 1 file changed, 86 insertions(+)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   f2b8da2..acd9474  main -> main
+outputs/latest
+outputs/history/2026-05-18
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.62
+Simulating 1000000 scenarios with nu=3.62...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0019915330994719925
+            Iterations: 88
+            Function evaluations: 8008
+            Gradient evaluations: 88
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 9.72%
+EGV5.DE Weight: 12.26%
+LYTR.DE Weight: 30.92%
+FRNE.DE Weight: 7.35%
+LYM9.DE Weight: 39.75%
+
+Expected Daily Return: 0.20%
+Daily Volatility: 0.76%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 65.10%
+Annualized Volatility: 12.04%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.8986938194197648
+Simulated Spearman Correlation:
+0.8941238793438755
+
+Historical Avg Tail Prob: 0.4083
+Simulated Tail Prob:  0.4747
+Email sent
+/home/sergio/automate_portfolio.sh: line 11: 156971 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/benchmark_portfolio.py
