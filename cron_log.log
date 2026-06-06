@@ -12848,3 +12848,34 @@ Traceback (most recent call last):
         newline="",
     )
 FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
+[main 7aa8170] Auto-update: 2026-06-05 06:12
+ 14 files changed, 1000133 insertions(+), 1000025 deletions(-)
+ create mode 100644 outputs/history/2026-06-05/correlation.csv
+ create mode 100644 outputs/history/2026-06-05/metrics.csv
+ create mode 100644 outputs/history/2026-06-05/summary.json
+ create mode 100644 outputs/history/2026-06-05/weights.csv
+ rewrite outputs/latest/correlation_selected_assets.csv (94%)
+ rewrite outputs/latest/forecasted_returns.png (92%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   204b832..7aa8170  main -> main
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py", line 4, in <module>
+    import matplotlib.pyplot as plt
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/pyplot.py", line 62, in <module>
+    from matplotlib import style as style  # noqa: F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/style/__init__.py", line 1, in <module>
+    from .core import available, context, library, reload_library, use
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/style/core.py", line 225, in <module>
+    _base_library = read_style_directory(BASE_LIBRARY_PATH)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/style/core.py", line 203, in read_style_directory
+    styles[path.stem] = _rc_params_in_file(path)
+                        ~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/__init__.py", line 910, in _rc_params_in_file
+    strippedline = cbook._strip_comment(line)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/cbook.py", line 472, in _strip_comment
+    quote_pos = s.find('"', pos)
+                ^^^^^^
+AttributeError: 'function' object has no attribute 'find'
+/home/sergio/automate_portfolio.sh: line 11: 90326 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/benchmark_portfolio.py
