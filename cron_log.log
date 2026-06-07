@@ -12879,3 +12879,49 @@ Traceback (most recent call last):
                 ^^^^^^
 AttributeError: 'function' object has no attribute 'find'
 /home/sergio/automate_portfolio.sh: line 11: 90326 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/benchmark_portfolio.py
+[main 259bb5c] Auto-update: 2026-06-06 06:00
+ 1 file changed, 31 insertions(+)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   7aa8170..259bb5c  main -> main
+outputs/latest
+outputs/history/2026-06-07
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.78
+Simulating 1000000 scenarios with nu=3.78...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.001910114144808051
+            Iterations: 76
+            Function evaluations: 6916
+            Gradient evaluations: 76
+
+--- Optimal Hybrid Portfolio ---
+
+LYTR.DE Weight: 34.28%
+INDA.DE Weight: 11.81%
+EMXC.DE Weight: 6.86%
+WEBD.DE Weight: 4.45%
+FRNE.DE Weight: 7.78%
+LYM9.DE Weight: 18.33%
+WELW.DE Weight: 16.50%
+
+Expected Daily Return: 0.19%
+Daily Volatility: 0.76%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 61.75%
+Annualized Volatility: 12.02%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.8905172413793103
+Simulated Spearman Correlation:
+0.881059308581866
+
+Historical Avg Tail Prob: 0.3571
+Simulated Tail Prob:  0.5148
+Email sent
+/home/sergio/automate_portfolio.sh: line 11: 98692 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/benchmark_portfolio.py
