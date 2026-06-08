@@ -12925,3 +12925,135 @@ Historical Avg Tail Prob: 0.3571
 Simulated Tail Prob:  0.5148
 Email sent
 /home/sergio/automate_portfolio.sh: line 11: 98692 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/benchmark_portfolio.py
+[main e1745eb] Auto-update: 2026-06-07 06:11
+ 14 files changed, 1000093 insertions(+), 1000025 deletions(-)
+ create mode 100644 outputs/history/2026-06-07/correlation.csv
+ create mode 100644 outputs/history/2026-06-07/metrics.csv
+ create mode 100644 outputs/history/2026-06-07/summary.json
+ create mode 100644 outputs/history/2026-06-07/weights.csv
+ rewrite outputs/latest/correlation_selected_assets.csv (94%)
+ rewrite outputs/latest/forecasted_returns.png (92%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   259bb5c..e1745eb  main -> main
+outputs/latest
+outputs/history/2026-06-08
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.78
+Simulating 1000000 scenarios with nu=3.78...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0018787500126726344
+            Iterations: 71
+            Function evaluations: 6461
+            Gradient evaluations: 71
+
+--- Optimal Hybrid Portfolio ---
+
+LYTR.DE Weight: 34.15%
+INDA.DE Weight: 12.42%
+EMXC.DE Weight: 6.29%
+WEBD.DE Weight: 5.77%
+FRNE.DE Weight: 7.63%
+LYM9.DE Weight: 17.64%
+WELW.DE Weight: 16.10%
+
+Expected Daily Return: 0.19%
+Daily Volatility: 0.75%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 60.48%
+Annualized Volatility: 11.97%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.8905172413793103
+Simulated Spearman Correlation:
+0.8813282517149428
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py", line 435, in <module>
+    simulated_returns = plot_return_distributions(df_simulated, nonzero_weights)
+  File "/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py", line 72, in plot_return_distributions
+    plt.hist(simulated_returns, bins=50, density=True, alpha=0.5, color='gray', label='Simulated Returns')
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/_api/deprecation.py", line 453, in wrapper
+    return func(*args, **kwargs)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/pyplot.py", line 3478, in hist
+    return gca().hist(
+           ~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/pyplot.py", line 2784, in gca
+    return gcf().gca()
+           ~~~~~~~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/figure.py", line 1719, in gca
+    return ax if ax is not None else self.add_subplot()
+                                     ~~~~~~~~~~~~~~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/figure.py", line 768, in add_subplot
+    ax = projection_class(self, *args, **pkw)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/axes/_base.py", line 732, in __init__
+    self.clear()
+    ~~~~~~~~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/axes/_base.py", line 1452, in clear
+    self.__clear()
+    ~~~~~~~~~~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/axes/_base.py", line 1330, in __clear
+    axis.clear()  # Also resets the scale to linear.
+    ~~~~~~~~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/axis.py", line 869, in clear
+    self._set_scale('linear')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/axis.py", line 766, in _set_scale
+    self._scale.set_default_locators_and_formatters(self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/scale.py", line 123, in set_default_locators_and_formatters
+    axis.set_major_formatter(ScalarFormatter())
+                             ~~~~~~~~~~~~~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/ticker.py", line 460, in __init__
+    self.set_useMathText(useMathText)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/ticker.py", line 591, in set_useMathText
+    ufont = font_manager.findfont(
+        font_manager.FontProperties(
+    ...<2 lines>...
+        fallback_to_default=False,
+    )
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/font_manager.py", line 1352, in findfont
+    ret = self._findfont_cached(
+        prop, fontext, directory, fallback_to_default, rebuild_if_missing,
+        rc_params)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/font_manager.py", line 1478, in _findfont_cached
+    + self.score_style(prop.get_style(), font.style)
+      ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'FontManager' object is not callable
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 66, in <module>
+    test_against_benchmarks(["AUM5.DE", "F500.DE", "EMXC.DE"])
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 38, in test_against_benchmarks
+    portfolio_data = pd.read_csv(BASE_OUTPUT / "history" / date_str / "weights.csv")
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
