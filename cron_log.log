@@ -13057,3 +13057,13 @@ Traceback (most recent call last):
         newline="",
     )
 FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
+[main 6f3fdc7] Auto-update: 2026-06-08 06:10
+ 9 files changed, 170 insertions(+), 16 deletions(-)
+ create mode 100644 outputs/history/2026-06-08/correlation.csv
+ create mode 100644 outputs/history/2026-06-08/metrics.csv
+ create mode 100644 outputs/history/2026-06-08/summary.json
+ create mode 100644 outputs/history/2026-06-08/weights.csv
+To https://github.com/PotSergione/portfolio_optimisation.git
+   e1745eb..6f3fdc7  main -> main
+/home/sergio/automate_portfolio.sh: line 8: 115945 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py
+/home/sergio/automate_portfolio.sh: line 11: 116010 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/benchmark_portfolio.py
