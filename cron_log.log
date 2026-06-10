@@ -13067,3 +13067,75 @@ To https://github.com/PotSergione/portfolio_optimisation.git
    e1745eb..6f3fdc7  main -> main
 /home/sergio/automate_portfolio.sh: line 8: 115945 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py
 /home/sergio/automate_portfolio.sh: line 11: 116010 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/benchmark_portfolio.py
+[main 6b1376c] Auto-update: 2026-06-09 06:00
+ 1 file changed, 10 insertions(+)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   6f3fdc7..6b1376c  main -> main
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py", line 4, in <module>
+    import matplotlib.pyplot as plt
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/pyplot.py", line 69, in <module>
+    from matplotlib.figure import Figure, FigureBase, figaspect
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/figure.py", line 40, in <module>
+    from matplotlib import _blocking_input, backend_bases, _docstring, projections
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/projections/__init__.py", line 55, in <module>
+    from .. import axes, _docstring
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/axes/__init__.py", line 2, in <module>
+    from ._axes import Axes
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/axes/_axes.py", line 68, in <module>
+    class Axes(_AxesBase):
+    ...<8802 lines>...
+            return height / (width * self.get_data_ratio())
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/axes/_base.py", line 795, in __init_subclass__
+    super().__init_subclass__(**kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/artist.py", line 149, in __init_subclass__
+    cls._update_set_signature_and_docstring()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/artist.py", line 177, in _update_set_signature_and_docstring
+    + kwdoc(cls))
+      ~~~~~^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/artist.py", line 1851, in kwdoc
+    'Properties:\n' + '\n'.join(ai.pprint_setters(leadingspace=4)))
+                                ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/artist.py", line 1612, in pprint_setters
+    accepts = self.get_valid_values(prop)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/artist.py", line 1485, in get_valid_values
+    match = self._get_valid_values_regex.search(docstring)
+RuntimeError: internal error in regular expression engine
+/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py:28: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns[benchmark] = data.loc[filter_date:].pct_change().fillna(0.0) + 1.0
+/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py:28: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns[benchmark] = data.loc[filter_date:].pct_change().fillna(0.0) + 1.0
+/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py:28: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns[benchmark] = data.loc[filter_date:].pct_change().fillna(0.0) + 1.0
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 66, in <module>
+    test_against_benchmarks(["AUM5.DE", "F500.DE", "EMXC.DE"])
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 38, in test_against_benchmarks
+    portfolio_data = pd.read_csv(BASE_OUTPUT / "history" / date_str / "weights.csv")
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
