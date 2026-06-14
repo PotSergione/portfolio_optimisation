@@ -13545,3 +13545,84 @@ Traceback (most recent call last):
         newline="",
     )
 FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
+[main 1f90745] Auto-update: 2026-06-13 06:10
+ 14 files changed, 1000294 insertions(+), 1000023 deletions(-)
+ create mode 100644 outputs/history/2026-06-13/correlation.csv
+ create mode 100644 outputs/history/2026-06-13/metrics.csv
+ create mode 100644 outputs/history/2026-06-13/summary.json
+ create mode 100644 outputs/history/2026-06-13/weights.csv
+ rewrite outputs/latest/correlation_selected_assets.csv (93%)
+ rewrite outputs/latest/forecasted_returns.png (92%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   be363e0..1f90745  main -> main
+outputs/latest
+outputs/history/2026-06-14
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.52
+Simulating 1000000 scenarios with nu=3.52...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0017336603450778616
+            Iterations: 60
+            Function evaluations: 5461
+            Gradient evaluations: 60
+
+--- Optimal Hybrid Portfolio ---
+
+LYTR.DE Weight: 32.81%
+INDA.DE Weight: 11.22%
+EMXC.DE Weight: 17.01%
+FRNE.DE Weight: 3.40%
+LYM9.DE Weight: 8.71%
+WELW.DE Weight: 26.67%
+
+Expected Daily Return: 0.17%
+Daily Volatility: 0.74%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 54.73%
+Annualized Volatility: 11.81%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.8935703809058181
+Simulated Spearman Correlation:
+0.8844293677655686
+
+Historical Avg Tail Prob: 0.3143
+Simulated Tail Prob:  0.5196
+Email sent
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 66, in <module>
+    test_against_benchmarks(["AUM5.DE", "F500.DE", "EMXC.DE"])
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 38, in test_against_benchmarks
+    portfolio_data = pd.read_csv(BASE_OUTPUT / "history" / date_str / "weights.csv")
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
