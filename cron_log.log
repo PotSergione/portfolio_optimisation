@@ -13954,3 +13954,111 @@ Traceback (most recent call last):
         newline="",
     )
 FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
+[main f65260a] Auto-update: 2026-06-18 06:11
+ 14 files changed, 1000126 insertions(+), 1000026 deletions(-)
+ create mode 100644 outputs/history/2026-06-18/correlation.csv
+ create mode 100644 outputs/history/2026-06-18/metrics.csv
+ create mode 100644 outputs/history/2026-06-18/summary.json
+ create mode 100644 outputs/history/2026-06-18/weights.csv
+ rewrite outputs/latest/correlation_selected_assets.csv (100%)
+ rewrite outputs/latest/forecasted_returns.png (91%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   4f59b03..f65260a  main -> main
+outputs/latest
+outputs/history/2026-06-19
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.67
+Simulating 1000000 scenarios with nu=3.67...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.001841384861484963
+            Iterations: 78
+            Function evaluations: 7099
+            Gradient evaluations: 78
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 1.77%
+LYTR.DE Weight: 29.42%
+INDA.DE Weight: 9.69%
+EMXC.DE Weight: 19.00%
+FRNE.DE Weight: 2.59%
+LYM9.DE Weight: 12.90%
+WELW.DE Weight: 24.64%
+
+Expected Daily Return: 0.18%
+Daily Volatility: 0.75%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 58.98%
+Annualized Volatility: 11.98%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.8922233996237792
+Simulated Spearman Correlation:
+0.8830388126992758
+
+Historical Avg Tail Prob: 0.3143
+Simulated Tail Prob:  0.5145
+Email sent
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 1, in <module>
+    from get_data import  get_etf_data
+  File "/home/sergio/portfolio_optimisation/src/get_data.py", line 1, in <module>
+    import yfinance as yf
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/yfinance/__init__.py", line 23, in <module>
+    from .search import Search
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/yfinance/search.py", line 24, in <module>
+    from . import utils
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/yfinance/utils.py", line 37, in <module>
+    import pandas as _pd
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/__init__.py", line 49, in <module>
+    from pandas.core.api import (
+    ...<62 lines>...
+    )
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/api.py", line 47, in <module>
+    from pandas.core.groupby import (
+    ...<2 lines>...
+    )
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/groupby/__init__.py", line 1, in <module>
+    from pandas.core.groupby.generic import (
+    ...<3 lines>...
+    )
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/groupby/generic.py", line 68, in <module>
+    from pandas.core.frame import DataFrame
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/frame.py", line 513, in <module>
+    class DataFrame(NDFrame, OpsMixin):
+    ...<12177 lines>...
+            return self._mgr.as_array()
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/core/frame.py", line 3281, in DataFrame
+    @deprecate_nonkeyword_arguments(
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        version="3.0", allowed_args=["self", "buf"], name="to_html"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/util/_decorators.py", line 295, in decorate
+    old_sig = inspect.signature(func)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/inspect.py", line 3384, in signature
+    return Signature.from_callable(obj, follow_wrapped=follow_wrapped,
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                   globals=globals, locals=locals, eval_str=eval_str)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/inspect.py", line 3107, in from_callable
+    return _signature_from_callable(obj, sigcls=cls,
+                                    follow_wrapper_chains=follow_wrapped,
+                                    globals=globals, locals=locals, eval_str=eval_str)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/inspect.py", line 2596, in _signature_from_callable
+    return _signature_from_function(sigcls, obj,
+                                    skip_bound_arg=skip_bound_arg,
+                                    globals=globals, locals=locals, eval_str=eval_str)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/inspect.py", line 2443, in _signature_from_function
+    for offset, name in enumerate(positional[non_default_count:]):
+                        ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'Parameter' object is not iterable
+/home/sergio/automate_portfolio.sh: line 11: 226026 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/benchmark_portfolio.py
