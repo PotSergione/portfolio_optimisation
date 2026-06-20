@@ -14062,3 +14062,85 @@ Traceback (most recent call last):
                         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: 'Parameter' object is not iterable
 /home/sergio/automate_portfolio.sh: line 11: 226026 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/benchmark_portfolio.py
+[main acb09c8] Auto-update: 2026-06-19 06:11
+ 14 files changed, 1000156 insertions(+), 1000024 deletions(-)
+ create mode 100644 outputs/history/2026-06-19/correlation.csv
+ create mode 100644 outputs/history/2026-06-19/metrics.csv
+ create mode 100644 outputs/history/2026-06-19/summary.json
+ create mode 100644 outputs/history/2026-06-19/weights.csv
+ rewrite outputs/latest/correlation_selected_assets.csv (100%)
+ rewrite outputs/latest/forecasted_returns.png (93%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   f65260a..acb09c8  main -> main
+outputs/latest
+outputs/history/2026-06-20
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.77
+Simulating 1000000 scenarios with nu=3.77...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0017891327289242605
+            Iterations: 71
+            Function evaluations: 6462
+            Gradient evaluations: 71
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 7.60%
+LYTR.DE Weight: 29.70%
+INDA.DE Weight: 3.78%
+EMXC.DE Weight: 14.97%
+FRNE.DE Weight: 5.54%
+LYM9.DE Weight: 16.94%
+WELW.DE Weight: 21.48%
+
+Expected Daily Return: 0.18%
+Daily Volatility: 0.75%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 56.90%
+Annualized Volatility: 11.95%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.8911056685250234
+Simulated Spearman Correlation:
+0.8821565139330811
+
+Historical Avg Tail Prob: 0.3143
+Simulated Tail Prob:  0.5126
+Email sent
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 66, in <module>
+    test_against_benchmarks(["AUM5.DE", "F500.DE", "EMXC.DE"])
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 38, in test_against_benchmarks
+    portfolio_data = pd.read_csv(BASE_OUTPUT / "history" / date_str / "weights.csv")
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
