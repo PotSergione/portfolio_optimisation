@@ -14342,3 +14342,55 @@ Traceback (most recent call last):
         newline="",
     )
 FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
+[main fef60bb] Auto-update: 2026-06-23 06:10
+ 14 files changed, 1000130 insertions(+), 1000024 deletions(-)
+ create mode 100644 outputs/history/2026-06-23/correlation.csv
+ create mode 100644 outputs/history/2026-06-23/metrics.csv
+ create mode 100644 outputs/history/2026-06-23/summary.json
+ create mode 100644 outputs/history/2026-06-23/weights.csv
+ rewrite outputs/latest/correlation_selected_assets.csv (100%)
+ rewrite outputs/latest/forecasted_returns.png (92%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (98%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   2845f63..fef60bb  main -> main
+outputs/latest
+outputs/history/2026-06-24
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.60
+Simulating 1000000 scenarios with nu=3.60...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0017229043622945214
+            Iterations: 82
+            Function evaluations: 7463
+            Gradient evaluations: 82
+
+--- Optimal Hybrid Portfolio ---
+
+LYTR.DE Weight: 28.92%
+INDA.DE Weight: 14.39%
+EMXC.DE Weight: 13.19%
+FRNE.DE Weight: 0.56%
+LYM9.DE Weight: 14.50%
+WELW.DE Weight: 28.44%
+
+Expected Daily Return: 0.17%
+Daily Volatility: 0.75%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 54.31%
+Annualized Volatility: 11.89%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.8917321491698659
+Simulated Spearman Correlation:
+0.8820587434310302
+
+Historical Avg Tail Prob: 0.2857
+Simulated Tail Prob:  0.5112
+Email sent
+/home/sergio/automate_portfolio.sh: line 11: 313558 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/benchmark_portfolio.py
