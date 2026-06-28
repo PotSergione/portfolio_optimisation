@@ -14727,3 +14727,95 @@ Traceback (most recent call last):
         newline="",
     )
 FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
+[main ac85837] Auto-update: 2026-06-27 06:09
+ 13 files changed, 799747 insertions(+), 1000015 deletions(-)
+ create mode 100644 outputs/history/2026-06-27/correlation.csv
+ create mode 100644 outputs/history/2026-06-27/metrics.csv
+ create mode 100644 outputs/history/2026-06-27/summary.json
+ create mode 100644 outputs/history/2026-06-27/weights.csv
+ rewrite outputs/latest/forecasted_returns.png (93%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   def781d..ac85837  main -> main
+/home/sergio/automate_portfolio.sh: line 8: 366405 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 1, in <module>
+    from get_data import  get_etf_data
+  File "/home/sergio/portfolio_optimisation/src/get_data.py", line 1, in <module>
+    import yfinance as yf
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/yfinance/__init__.py", line 23, in <module>
+    from .search import Search
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/yfinance/search.py", line 27, in <module>
+    from .data import YfData
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/yfinance/data.py", line 8, in <module>
+    from bs4 import BeautifulSoup
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/__init__.py", line 65, in <module>
+    from .builder import (
+    ...<2 lines>...
+    )
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/builder/__init__.py", line 24, in <module>
+    from bs4.element import (
+    ...<10 lines>...
+    )
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/element.py", line 9, in <module>
+    from bs4.css import CSS
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/css.py", line 37, in <module>
+    import soupsieve
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/soupsieve/__init__.py", line 30, in <module>
+    from . import css_parser as cp
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/soupsieve/css_parser.py", line 428, in <module>
+    class CSSParser:
+    ...<723 lines>...
+            return self.parse_selectors(self.selector_iter(self.pattern), index, flags)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/soupsieve/css_parser.py", line 451, in CSSParser
+    SelectorPattern("at_rule", PAT_AT_RULE),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/soupsieve/css_parser.py", line 310, in __init__
+    self.re_pattern = re.compile(pattern, re.I | re.X | re.U)
+                      ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/__init__.py", line 289, in compile
+    return _compile(pattern, flags)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/__init__.py", line 350, in _compile
+    p = _compiler.compile(pattern, flags)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_compiler.py", line 748, in compile
+    p = _parser.parse(p, flags)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 980, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 459, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       not nested and not items))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 863, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 459, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       not nested and not items))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 863, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 459, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       not nested and not items))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 863, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 459, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       not nested and not items))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 572, in _parse
+    code1 = _class_escape(source, this)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 323, in _class_escape
+    escape += source.getwhile(2, HEXDIGITS)
+              ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 271, in getwhile
+    self.__next()
+    ~~~~~~~~~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 253, in __next
+    self.index = index + 1
+                 ~~~~~~^~~
+TypeError: unsupported operand type(s) for +: 'Tokenizer' and 'int'
