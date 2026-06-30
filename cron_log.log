@@ -14899,3 +14899,126 @@ Traceback (most recent call last):
         newline="",
     )
 FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
+[main 3421fe5] Auto-update: 2026-06-29 06:10
+ 14 files changed, 1000121 insertions(+), 199709 deletions(-)
+ create mode 100644 outputs/history/2026-06-29/correlation.csv
+ create mode 100644 outputs/history/2026-06-29/metrics.csv
+ create mode 100644 outputs/history/2026-06-29/summary.json
+ create mode 100644 outputs/history/2026-06-29/weights.csv
+ rewrite outputs/latest/correlation_selected_assets.csv (91%)
+ rewrite outputs/latest/forecasted_returns.png (92%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   54455d4..3421fe5  main -> main
+outputs/latest
+outputs/history/2026-06-30
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.69
+Simulating 1000000 scenarios with nu=3.69...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0015946424367630568
+            Iterations: 69
+            Function evaluations: 6280
+            Gradient evaluations: 69
+
+--- Optimal Hybrid Portfolio ---
+
+LYTR.DE Weight: 26.39%
+INDA.DE Weight: 11.30%
+EMXC.DE Weight: 10.42%
+WEBD.DE Weight: 2.60%
+LYM9.DE Weight: 20.26%
+WELW.DE Weight: 29.03%
+
+Expected Daily Return: 0.16%
+Daily Volatility: 0.74%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 49.41%
+Annualized Volatility: 11.83%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.8904043018173453
+Simulated Spearman Correlation:
+0.880113830124667
+
+Historical Avg Tail Prob: 0.3375
+Simulated Tail Prob:  0.5053
+Email sent
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 1, in <module>
+    from get_data import  get_etf_data
+  File "/home/sergio/portfolio_optimisation/src/get_data.py", line 1, in <module>
+    import yfinance as yf
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/yfinance/__init__.py", line 23, in <module>
+    from .search import Search
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/yfinance/search.py", line 27, in <module>
+    from .data import YfData
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/yfinance/data.py", line 8, in <module>
+    from bs4 import BeautifulSoup
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/__init__.py", line 65, in <module>
+    from .builder import (
+    ...<2 lines>...
+    )
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/builder/__init__.py", line 24, in <module>
+    from bs4.element import (
+    ...<10 lines>...
+    )
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/element.py", line 15, in <module>
+    from bs4.formatter import (
+    ...<3 lines>...
+    )
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/formatter.py", line 4, in <module>
+    from bs4.dammit import EntitySubstitution
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/dammit.py", line 482, in <module>
+    EntitySubstitution._populate_class_variables()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/dammit.py", line 256, in _populate_class_variables
+    cls.CHARACTER_TO_HTML_ENTITY_WITH_AMPERSAND_RE = re.compile(
+                                                     ~~~~~~~~~~^
+        re_definition_with_ampersand
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/__init__.py", line 289, in compile
+    return _compile(pattern, flags)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/__init__.py", line 350, in _compile
+    p = _compiler.compile(pattern, flags)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_compiler.py", line 748, in compile
+    p = _parser.parse(p, flags)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 980, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 459, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       not nested and not items))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 863, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 459, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       not nested and not items))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 774, in _parse
+    p = _parse_sub(source, state, verbose, nested + 1)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 459, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       not nested and not items))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 529, in _parse
+    sourceget()
+    ~~~~~~~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 262, in get
+    self.__next()
+    ~~~~~~~~~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 253, in __next
+    self.index = index + 1
+                 ~~~~~~^~~
+TypeError: unsupported operand type(s) for +: 'Tokenizer' and 'int'
