@@ -15225,3 +15225,47 @@ Traceback (most recent call last):
         newline="",
     )
 FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
+[main 1d9f43e] Auto-update: 2026-07-04 06:00
+ 1 file changed, 35 insertions(+)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   9ef56c1..1d9f43e  main -> main
+outputs/latest
+outputs/history/2026-07-05
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.77
+Simulating 1000000 scenarios with nu=3.77...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.001652556840823414
+            Iterations: 60
+            Function evaluations: 5460
+            Gradient evaluations: 60
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 12.29%
+LYTR.DE Weight: 27.59%
+EMXC.DE Weight: 11.74%
+LYM9.DE Weight: 18.84%
+WELW.DE Weight: 29.54%
+
+Expected Daily Return: 0.17%
+Daily Volatility: 0.75%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 51.60%
+Annualized Volatility: 11.88%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.8875938343173136
+Simulated Spearman Correlation:
+0.8772322938293416
+
+Historical Avg Tail Prob: 0.3375
+Simulated Tail Prob:  0.4954
+Email sent
+/home/sergio/automate_portfolio.sh: line 11: 454936 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/benchmark_portfolio.py
