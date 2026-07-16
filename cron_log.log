@@ -15905,3 +15905,80 @@ Traceback (most recent call last):
         newline="",
     )
 FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
+[main 4c0a43a] Auto-update: 2026-07-15 06:10
+ 14 files changed, 1000128 insertions(+), 1000022 deletions(-)
+ create mode 100644 outputs/history/2026-07-15/correlation.csv
+ create mode 100644 outputs/history/2026-07-15/metrics.csv
+ create mode 100644 outputs/history/2026-07-15/summary.json
+ create mode 100644 outputs/history/2026-07-15/weights.csv
+ rewrite outputs/latest/correlation_selected_assets.csv (100%)
+ rewrite outputs/latest/forecasted_returns.png (91%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   b0d9aa6..4c0a43a  main -> main
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py", line 3, in <module>
+    from scipy.stats import t, norm, multivariate_t
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/scipy/stats/__init__.py", line 626, in <module>
+    from ._stats_py import *
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/scipy/stats/_stats_py.py", line 1047, in <module>
+    @_axis_nan_policy_factory(  # noqa: E302
+     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+        _moment_result_object, n_samples=1, result_to_tuple=_moment_tuple,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        n_outputs=_moment_outputs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/scipy/stats/_axis_nan_policy.py", line 658, in axis_nan_policy_decorator
+    doc = FunctionDoc(axis_nan_policy_wrapper)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/scipy/_lib/_docscrape.py", line 589, in __init__
+    NumpyDocString.__init__(self, doc, config)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/scipy/_lib/_docscrape.py", line 148, in __init__
+    self._parse()
+    ~~~~~~~~~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/scipy/_lib/_docscrape.py", line 414, in _parse
+    self[section] = self._parse_param_list(
+                    ~~~~~~~~~~~~~~~~~~~~~~^
+        content, single_element_is_type=True
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/scipy/_lib/_docscrape.py", line 229, in _parse_param_list
+    header = r.read().strip()
+             ~~~~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/scipy/_lib/_docscrape.py", line 52, in read
+    self._l += 1
+    ^^^^^^^
+AttributeError: 'str' object has no attribute '_l' and no __dict__ for setting new attributes
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 66, in <module>
+    test_against_benchmarks(["AUM5.DE", "F500.DE", "EMXC.DE"])
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 38, in test_against_benchmarks
+    portfolio_data = pd.read_csv(BASE_OUTPUT / "history" / date_str / "weights.csv")
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
