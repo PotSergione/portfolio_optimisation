@@ -15982,3 +15982,125 @@ Traceback (most recent call last):
         newline="",
     )
 FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
+[main f9d01aa] Auto-update: 2026-07-16 06:00
+ 1 file changed, 77 insertions(+)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   4c0a43a..f9d01aa  main -> main
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+outputs/latest
+outputs/history/2026-07-17
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.78
+Simulating 1000000 scenarios with nu=3.78...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0015673291369924687
+            Iterations: 68
+            Function evaluations: 6189
+            Gradient evaluations: 68
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 20.23%
+LYTR.DE Weight: 35.75%
+EMXC.DE Weight: 9.49%
+LYM9.DE Weight: 7.62%
+WELW.DE Weight: 26.91%
+
+Expected Daily Return: 0.16%
+Daily Volatility: 0.74%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 48.39%
+Annualized Volatility: 11.70%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.8800672000911187
+Simulated Spearman Correlation:
+0.8688706222618422
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py", line 435, in <module>
+    simulated_returns = plot_return_distributions(df_simulated, nonzero_weights)
+  File "/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py", line 119, in plot_return_distributions
+    plt.savefig(LATEST_DIR / 'forecasted_returns.png', dpi=150)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/pyplot.py", line 1250, in savefig
+    res = fig.savefig(*args, **kwargs)  # type: ignore[func-returns-value]
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/figure.py", line 3490, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/backend_bases.py", line 2157, in print_figure
+    self.figure.draw(renderer)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/artist.py", line 94, in draw_wrapper
+    result = draw(artist, renderer, *args, **kwargs)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/artist.py", line 71, in draw_wrapper
+    return draw(artist, renderer)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/figure.py", line 3257, in draw
+    mimage._draw_list_compositing_images(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        renderer, self, artists, self.suppressComposite)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/image.py", line 134, in _draw_list_compositing_images
+    a.draw(renderer)
+    ~~~~~~^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/artist.py", line 71, in draw_wrapper
+    return draw(artist, renderer)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/axes/_base.py", line 3226, in draw
+    mimage._draw_list_compositing_images(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        renderer, self, artists, self.get_figure(root=True).suppressComposite)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/image.py", line 134, in _draw_list_compositing_images
+    a.draw(renderer)
+    ~~~~~~^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/artist.py", line 71, in draw_wrapper
+    return draw(artist, renderer)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/lines.py", line 784, in draw
+    tpath, affine = (self._get_transformed_path()
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/lines.py", line 749, in _get_transformed_path
+    self._transform_path()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/lines.py", line 744, in _transform_path
+    self._transformed_path = TransformedPath(_path, self.get_transform())
+                             ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/matplotlib/transforms.py", line 2762, in __init__
+    self._transform = transform
+    ^^^^^^^^^^^^^^^
+TypeError: 'TransformedPath' object does not support the context manager protocol
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 66, in <module>
+    test_against_benchmarks(["AUM5.DE", "F500.DE", "EMXC.DE"])
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 38, in test_against_benchmarks
+    portfolio_data = pd.read_csv(BASE_OUTPUT / "history" / date_str / "weights.csv")
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
