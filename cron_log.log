@@ -16343,3 +16343,49 @@ Traceback (most recent call last):
         newline="",
     )
 FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
+[main 9cf0e0a] Auto-update: 2026-07-21 06:00
+ 1 file changed, 42 insertions(+)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   22add23..9cf0e0a  main -> main
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+outputs/latest
+outputs/history/2026-07-22
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.84
+Simulating 1000000 scenarios with nu=3.84...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0016144633924206032
+            Iterations: 67
+            Function evaluations: 6098
+            Gradient evaluations: 67
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 20.53%
+LYTR.DE Weight: 36.63%
+EMXC.DE Weight: 8.96%
+LYM9.DE Weight: 7.57%
+WELW.DE Weight: 26.33%
+
+Expected Daily Return: 0.16%
+Daily Volatility: 0.74%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 50.16%
+Annualized Volatility: 11.76%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.8815030903204585
+Simulated Spearman Correlation:
+0.8705317064483669
+
+Historical Avg Tail Prob: 0.2625
+Simulated Tail Prob:  0.4908
+Email sent
+/home/sergio/automate_portfolio.sh: line 11: 632776 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/benchmark_portfolio.py
