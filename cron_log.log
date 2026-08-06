@@ -17612,3 +17612,57 @@ Traceback (most recent call last):
     char = self.decoded_string[index]
            ~~~~~~~~~~~~~~~~~~~^^^^^^^
 TypeError: string indices must be integers, not 'str'
+[main 7aee997] Auto-update: 2026-08-05 06:10
+ 14 files changed, 1000310 insertions(+), 1000021 deletions(-)
+ create mode 100644 outputs/history/2026-08-05/correlation.csv
+ create mode 100644 outputs/history/2026-08-05/metrics.csv
+ create mode 100644 outputs/history/2026-08-05/summary.json
+ create mode 100644 outputs/history/2026-08-05/weights.csv
+ rewrite outputs/latest/correlation_selected_assets.csv (91%)
+ rewrite outputs/latest/forecasted_returns.png (91%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   de9208e..7aee997  main -> main
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+outputs/latest
+outputs/history/2026-08-06
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.93
+Simulating 1000000 scenarios with nu=3.93...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0016119156536932987
+            Iterations: 59
+            Function evaluations: 5370
+            Gradient evaluations: 59
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 31.56%
+LYTR.DE Weight: 38.16%
+EMXC.DE Weight: 2.64%
+WEBD.DE Weight: 2.13%
+LYM9.DE Weight: 4.08%
+WELW.DE Weight: 21.44%
+
+Expected Daily Return: 0.16%
+Daily Volatility: 0.74%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 50.06%
+Annualized Volatility: 11.79%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.8701081980180854
+Simulated Spearman Correlation:
+0.8621136617017661
+
+Historical Avg Tail Prob: 0.2778
+Simulated Tail Prob:  0.4880
+Email sent
+/home/sergio/automate_portfolio.sh: line 11: 91737 Segmentation fault      (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/benchmark_portfolio.py
