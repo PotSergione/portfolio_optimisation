@@ -17829,3 +17829,85 @@ Traceback (most recent call last):
         newline="",
     )
 FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
+[main 9ca4a5b] Auto-update: 2026-08-08 06:11
+ 14 files changed, 1000122 insertions(+), 1000021 deletions(-)
+ create mode 100644 outputs/history/2026-08-08/correlation.csv
+ create mode 100644 outputs/history/2026-08-08/metrics.csv
+ create mode 100644 outputs/history/2026-08-08/summary.json
+ create mode 100644 outputs/history/2026-08-08/weights.csv
+ rewrite outputs/latest/correlation_selected_assets.csv (91%)
+ rewrite outputs/latest/forecasted_returns.png (92%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   22ef821..9ca4a5b  main -> main
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+outputs/latest
+outputs/history/2026-08-09
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 4.00
+Simulating 1000000 scenarios with nu=4.00...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0016535880401178423
+            Iterations: 71
+            Function evaluations: 6462
+            Gradient evaluations: 71
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 32.13%
+LYTR.DE Weight: 39.17%
+WEBD.DE Weight: 0.63%
+LYM9.DE Weight: 5.92%
+WELW.DE Weight: 22.15%
+
+Expected Daily Return: 0.17%
+Daily Volatility: 0.74%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 51.64%
+Annualized Volatility: 11.80%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.8693417662830725
+Simulated Spearman Correlation:
+0.8618204869870444
+
+Historical Avg Tail Prob: 0.2778
+Simulated Tail Prob:  0.4873
+Email sent
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 66, in <module>
+    test_against_benchmarks(["AUM5.DE", "F500.DE", "EMXC.DE"])
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 38, in test_against_benchmarks
+    portfolio_data = pd.read_csv(BASE_OUTPUT / "history" / date_str / "weights.csv")
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
