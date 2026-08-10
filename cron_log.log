@@ -17911,3 +17911,64 @@ Traceback (most recent call last):
         newline="",
     )
 FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
+[main ecda37e] Auto-update: 2026-08-09 06:10
+ 14 files changed, 1000123 insertions(+), 1000021 deletions(-)
+ create mode 100644 outputs/history/2026-08-09/correlation.csv
+ create mode 100644 outputs/history/2026-08-09/metrics.csv
+ create mode 100644 outputs/history/2026-08-09/summary.json
+ create mode 100644 outputs/history/2026-08-09/weights.csv
+ rewrite outputs/latest/correlation_selected_assets.csv (91%)
+ rewrite outputs/latest/forecasted_returns.png (92%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   9ca4a5b..ecda37e  main -> main
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py", line 3, in <module>
+    from scipy.stats import t, norm, multivariate_t
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/scipy/stats/__init__.py", line 626, in <module>
+    from ._stats_py import *
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/scipy/stats/_stats_py.py", line 52, in <module>
+    from . import distributions
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/scipy/stats/distributions.py", line 10, in <module>
+    from . import _continuous_distns
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/scipy/stats/_continuous_distns.py", line 8917, in <module>
+    powerlognorm = powerlognorm_gen(a=0.0, name="powerlognorm")
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/scipy/stats/_distn_infrastructure.py", line 1867, in __init__
+    super().__init__(seed)
+    ~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/scipy/stats/_distn_infrastructure.py", line 687, in __init__
+    sig = _getfullargspec(self._stats)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/scipy/_lib/_util.py", line 557, in getfullargspec_no_self
+    kwdefaults = {p.name: p.default for p in sig.parameters.values()
+                                             ~~~~~~~~~~~~~~~~~~~~~^^
+TypeError: 'Parameter' object is not iterable
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 66, in <module>
+    test_against_benchmarks(["AUM5.DE", "F500.DE", "EMXC.DE"])
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 38, in test_against_benchmarks
+    portfolio_data = pd.read_csv(BASE_OUTPUT / "history" / date_str / "weights.csv")
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
