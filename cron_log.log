@@ -20313,3 +20313,115 @@ Traceback (most recent call last):
         newline="",
     )
 FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
+[main a97bc09] Auto-update: 2026-08-26 06:10
+ 14 files changed, 1000302 insertions(+), 1000021 deletions(-)
+ create mode 100644 outputs/history/2026-08-26/correlation.csv
+ create mode 100644 outputs/history/2026-08-26/metrics.csv
+ create mode 100644 outputs/history/2026-08-26/summary.json
+ create mode 100644 outputs/history/2026-08-26/weights.csv
+ rewrite outputs/latest/correlation_selected_assets.csv (91%)
+ rewrite outputs/latest/forecasted_returns.png (93%)
+ rewrite outputs/latest/implied_portfolio_return_distribution.png (99%)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   72b216e..a97bc09  main -> main
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py", line 10, in <module>
+    from get_data import get_etf_data
+  File "/home/sergio/portfolio_optimisation/src/get_data.py", line 1, in <module>
+    import yfinance as yf
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/yfinance/__init__.py", line 23, in <module>
+    from .search import Search
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/yfinance/search.py", line 27, in <module>
+    from .data import YfData
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/yfinance/data.py", line 8, in <module>
+    from bs4 import BeautifulSoup
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/__init__.py", line 65, in <module>
+    from .builder import (
+    ...<2 lines>...
+    )
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/builder/__init__.py", line 24, in <module>
+    from bs4.element import (
+    ...<10 lines>...
+    )
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/element.py", line 15, in <module>
+    from bs4.formatter import (
+    ...<3 lines>...
+    )
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/formatter.py", line 4, in <module>
+    from bs4.dammit import EntitySubstitution
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/dammit.py", line 482, in <module>
+    EntitySubstitution._populate_class_variables()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/dammit.py", line 256, in _populate_class_variables
+    cls.CHARACTER_TO_HTML_ENTITY_WITH_AMPERSAND_RE = re.compile(
+                                                     ~~~~~~~~~~^
+        re_definition_with_ampersand
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/__init__.py", line 289, in compile
+    return _compile(pattern, flags)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/__init__.py", line 350, in _compile
+    p = _compiler.compile(pattern, flags)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_compiler.py", line 748, in compile
+    p = _parser.parse(p, flags)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 980, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 459, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       not nested and not items))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 863, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 459, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       not nested and not items))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 529, in _parse
+    sourceget()
+    ~~~~~~~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 262, in get
+    self.__next()
+    ~~~~~~~~~~~^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 242, in __next
+    char = self.decoded_string[index]
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^
+TypeError: string indices must be integers, not 'str'
+/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py:28: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns[benchmark] = data.loc[filter_date:].pct_change().fillna(0.0) + 1.0
+/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py:28: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns[benchmark] = data.loc[filter_date:].pct_change().fillna(0.0) + 1.0
+/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py:28: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  returns[benchmark] = data.loc[filter_date:].pct_change().fillna(0.0) + 1.0
+Traceback (most recent call last):
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 66, in <module>
+    test_against_benchmarks(["AUM5.DE", "F500.DE", "EMXC.DE"])
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 38, in test_against_benchmarks
+    portfolio_data = pd.read_csv(BASE_OUTPUT / "history" / date_str / "weights.csv")
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
