@@ -22339,3 +22339,120 @@ Traceback (most recent call last):
         newline="",
     )
 FileNotFoundError: [Errno 2] No such file or directory: 'outputs/history/2026-04-09/weights.csv'
+[main 39be465] Auto-update: 2026-09-05 06:00
+ 1 file changed, 48 insertions(+)
+To https://github.com/PotSergione/portfolio_optimisation.git
+   a362e9b..39be465  main -> main
+/home/sergio/portfolio_optimisation/src/cvar_optim_portfolio_AMUNDI_Student_t_Copula.py:198: FutureWarning: The default fill_method='pad' in Series.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  data[ticker] = get_etf_data(ticker)['Close'].pct_change().dropna()
+outputs/latest
+outputs/history/2026-09-06
+Calculating Kendall's Tau matrix (this may take a moment)...
+Adjusting matrix to Positive Definite...
+Optimal Copula Degrees of Freedom: 3.88
+Simulating 1000000 scenarios with nu=3.88...
+Simulation Complete.
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: -0.0016618619871894135
+            Iterations: 59
+            Function evaluations: 5369
+            Gradient evaluations: 59
+
+--- Optimal Hybrid Portfolio ---
+
+LYBK.DE Weight: 25.23%
+LYTR.DE Weight: 39.46%
+EMXC.DE Weight: 12.74%
+WEBD.DE Weight: 0.57%
+WELW.DE Weight: 22.00%
+
+Expected Daily Return: 0.17%
+Daily Volatility: 0.74%
+Daily CVaR (95%): -1.50%
+
+Annualized Return: 51.96%
+Annualized Volatility: 11.76%
+Annualized CVaR (95%): -23.81%
+
+--- Testing how well the copula model fits the data ---
+
+Original Spearman Correlation:
+0.8715707839180027
+Simulated Spearman Correlation:
+0.8639394679919574
+
+Historical Avg Tail Prob: 0.2800
+Simulated Tail Prob:  0.4852
+Email sent
+Fatal Python error: _PyEval_EvalFrameDefault: Executing a cache.
+Python runtime state: initialized
+
+Current thread 0x000071c329e9b440 (most recent call first):
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 112 in __init__
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 513 in _parse
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 459 in _parse_sub
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 863 in _parse
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 459 in _parse_sub
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_parser.py", line 980 in parse
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/_compiler.py", line 748 in compile
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/__init__.py", line 350 in _compile
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/re/__init__.py", line 289 in compile
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/dammit.py", line 255 in _populate_class_variables
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/dammit.py", line 482 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/formatter.py", line 4 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/element.py", line 15 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/builder/__init__.py", line 24 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/bs4/__init__.py", line 65 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/yfinance/data.py", line 8 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/yfinance/search.py", line 27 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "/home/sergio/miniconda/envs/Mast/lib/python3.13/site-packages/yfinance/__init__.py", line 23 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "/home/sergio/portfolio_optimisation/src/get_data.py", line 1 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "/home/sergio/portfolio_optimisation/src/benchmark_portfolio.py", line 1 in <module>
+
+Extension modules: numpy._core._multiarray_umath, numpy.linalg._umath_linalg, pyarrow.lib, numpy.random._common, numpy.random.bit_generator, numpy.random._bounded_integers, numpy.random._pcg64, numpy.random._mt19937, numpy.random._generator, numpy.random._philox, numpy.random._sfc64, numpy.random.mtrand, pandas._libs.tslibs.ccalendar, pandas._libs.tslibs.np_datetime, pandas._libs.tslibs.dtypes, pandas._libs.tslibs.base, pandas._libs.tslibs.nattype, pandas._libs.tslibs.timezones, pandas._libs.tslibs.fields, pandas._libs.tslibs.timedeltas, pandas._libs.tslibs.tzconversion, pandas._libs.tslibs.timestamps, pandas._libs.properties, pandas._libs.tslibs.offsets, pandas._libs.tslibs.strptime, pandas._libs.tslibs.parsing, pandas._libs.tslibs.conversion, pandas._libs.tslibs.period, pandas._libs.tslibs.vectorized, pandas._libs.ops_dispatch, pandas._libs.missing, pandas._libs.hashtable, pandas._libs.algos, pandas._libs.interval, pandas._libs.lib, pyarrow._compute, pandas._libs.ops, pandas._libs.hashing, pandas._libs.arrays, pandas._libs.tslib, pandas._libs.sparse, pandas._libs.internals, pandas._libs.indexing, pandas._libs.index, pandas._libs.writers, pandas._libs.join, pandas._libs.window.aggregations, pandas._libs.window.indexers, pandas._libs.reshape, pandas._libs.groupby, pandas._libs.json, pandas._libs.parsers, pandas._libs.testing, _cffi_backend, charset_normalizer.md (total: 55)
+/home/sergio/automate_portfolio.sh: line 11: 546344 Aborted                 (core dumped) /home/sergio/miniconda/envs/Mast/bin/python src/benchmark_portfolio.py
